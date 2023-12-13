@@ -46,7 +46,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            
+
         </ul>
 
         <!-- Right navbar links -->
@@ -158,6 +158,38 @@
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Bộ sản phẩm
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route("color.index") }}" class="nav-link {{ set_active('bookset.*') }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Màu sắc
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route("glaze.index") }}" class="nav-link {{ set_active('bookset.*') }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Loại men
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route("size.index") }}" class="nav-link {{ set_active('bookset.*') }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Kích thước
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route("country.index") }}" class="nav-link {{ set_active('bookset.*') }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Nước sản xuất
                                     </p>
                                 </a>
                             </li>

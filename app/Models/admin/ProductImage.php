@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProductImage extends Model
 {
     protected $table = "PRODUCTIMAGE";
-    protected $primaryKey = "IMAGEID";
+    protected $primaryKey = "imageid";
     static $rules = [
-        'IMAGEID' => 'required',
+        'imageid' => 'required',
     ];
 
     protected $perPage = 20;
@@ -19,7 +19,7 @@ class ProductImage extends Model
      *
      * @var array
      */
-    protected $fillable = ['IMAGEID', 'PRODUCTID', 'ImagePath'];
+    protected $fillable = ['imageid', 'productid', 'imagepath'];
 
     public $timestamps = false;
 

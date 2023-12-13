@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Productset extends Model
 {
     protected $table = "PRODUCTSET";
-    protected $primaryKey = "SETID";
+    protected $primaryKey = "setid";
 
     static $rules = [
-        'SETNAME' => 'required',
-        'IMAGE' => 'image|mimes:jpeg,png,jpg,gif'
+        'setname' => 'required',
+        'image' => 'image|mimes:jpeg,png,jpg,gif'
     ];
 
     protected $perPage = 20;
@@ -24,7 +24,7 @@ class Productset extends Model
      *
      * @var array
      */
-    protected $fillable = ['SETNAME', 'IMAGE', 'NOTE'];
+    protected $fillable = ['setname', 'image', 'note'];
 
 
     /**

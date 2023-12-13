@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ProductsetDetail extends Model
 {
     protected $table = "PRODUCTSETDETAIL";
-    protected $primaryKey = ["SETID", "PRODUCTID"];
+    protected $primaryKey = ["setid", "productid"];
 
     static $rules = [
-        'SETID' => 'required',
-        'PRODUCTID' => 'required'
+        'setid' => 'required',
+        'productid' => 'required'
     ];
 
     protected $perPage = 20;
@@ -24,7 +24,7 @@ class ProductsetDetail extends Model
      *
      * @var array
      */
-    protected $fillable = ['SETID', 'PRODUCTID', 'QUANTITY'];
+    protected $fillable = ['setid', 'productid', 'quantity'];
 
 
     /**

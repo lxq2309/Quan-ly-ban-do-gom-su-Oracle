@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Glaze extends Model
 {
     protected $table = "GLAZE";
-    protected $primaryKey = "GLAZEID";
+    protected $primaryKey = "glazeid";
     static $rules = [
-        'GLAZENAME' => 'required',
+        'glazename' => 'required',
     ];
 
     protected $perPage = 20;

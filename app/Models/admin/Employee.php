@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Hash;
 class Employee extends Model implements Authenticatable
 {
     protected $table = "EMPLOYEE";
-    protected $primaryKey = "EMPLOYEEID";
+    protected $primaryKey = "employeeid";
 
     public $timestamps = false;
 
     protected $perPage = 20;
 
     static $rules = [
-        'PHONENUMBER' => 'required',
-        'EMPLOYEENAME' => 'required',
-        'USERNAME' => 'required'
+        'phonenumber' => 'required',
+        'employeename' => 'required',
+        'username' => 'required'
     ];
 
     /**

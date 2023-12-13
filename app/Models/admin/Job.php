@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     protected $table = "GOMSU_JOB";
-    protected $primaryKey = "JOBID";
+    protected $primaryKey = "jobid";
     static $rules = [
-        'JOBTITLE' => 'required',
+        'jobtitle' => 'required',
     ];
 
     protected $perPage = 20;
@@ -21,7 +21,7 @@ class Job extends Model
      *
      * @var array
      */
-    protected $fillable = ['JOBTITLE', 'SALARY'];
+    protected $fillable = ['jobtitle', 'salary'];
 
 
     /**

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseOrderDetail extends Model
 {
     protected $table = "PURCHASEORDERDETAIL";
-    protected $primaryKey = ["ORDERID", "PRODUCTID"];
+    protected $primaryKey = ["orderid", "productid"];
     public $incrementing = false;
     static $rules = [
 
@@ -23,7 +23,7 @@ class PurchaseOrderDetail extends Model
      *
      * @var array
      */
-    protected $fillable = ['ORDERID', 'PRODUCTID', 'QUANTITY', 'PRICE', 'DISCOUNT', 'TOTALAMOUNT'];
+    protected $fillable = ['orderid', 'productid', 'quantity', 'price', 'discount', 'totalamount'];
 
 
     /**

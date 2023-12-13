@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class InvoiceDetail extends Model
 {
     protected $table = "INVOICEDETAIL";
-    protected $primaryKey = ["INVOICEID", "PRODUCTID"];
+    protected $primaryKey = ["invoiceid", "productid"];
     public $incrementing = false;
     static $rules = [
-        'INVOICEID' => 'required',
-        'PRODUCTID' => 'required',
+        'invoiceid' => 'required',
+        'productid' => 'required',
     ];
 
     protected $perPage = 20;

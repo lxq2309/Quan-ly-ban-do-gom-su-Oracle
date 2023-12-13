@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     protected $table = "SUPPLIER";
-    protected $primaryKey = "SUPPLIERID";
+    protected $primaryKey = "supplierid";
     static $rules = [
-        'SUPPLIERNAME' => 'required',
+        'suppliername' => 'required',
     ];
 
     protected $perPage = 20;

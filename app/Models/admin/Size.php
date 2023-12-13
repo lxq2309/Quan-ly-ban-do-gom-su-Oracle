@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Size extends Model
 {
     protected $table = "GOMSU_SIZE";
-    protected $primaryKey = "SIZEID";
+    protected $primaryKey = "sizeid";
     static $rules = [
-        'SIZENAME' => 'required',
+        'sizename' => 'required',
     ];
 
     protected $perPage = 20;

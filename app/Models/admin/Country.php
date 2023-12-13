@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     protected $table = "COUNTRY";
-    protected $primaryKey = "COUNTRYID";
+    protected $primaryKey = "countryid";
     static $rules = [
-        'COUNTRYNAME' => 'required',
+        'countryname' => 'required',
     ];
 
     protected $perPage = 20;

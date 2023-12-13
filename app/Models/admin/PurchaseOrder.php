@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseOrder extends Model
 {
     protected $table = "PURCHASEORDER";
-    protected $primaryKey = "ORDERID";
+    protected $primaryKey = "orderid";
     static $rules = [
-        'ORDERID' => 'required',
+        'orderid' => 'required',
 
     ];
 
@@ -23,7 +23,7 @@ class PurchaseOrder extends Model
      *
      * @var array
      */
-    protected $fillable = ['ORDERID', 'EMPLOYEEID', 'ORDERDATE', 'SUPPLIERID'];
+    protected $fillable = ['orderid', 'employeeid', 'orderdate', 'supplierid'];
 
 
     /**

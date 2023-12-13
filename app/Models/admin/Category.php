@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table = "GOMSU_CATEGORY";
-    protected $primaryKey = "CATEGORYID";
+    protected $primaryKey = "categoryid";
     static $rules = [
-        'CATEGORYNAME' => 'required',
+        'categoryname' => 'required',
     ];
 
     protected $perPage = 20;
@@ -21,7 +21,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['CATEGORYNAME', 'PARENTID'];
+    protected $fillable = ['categoryname', 'parentid'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class SalesInvoice extends Model
 {
     protected $table = "SALESINVOICE";
-    protected $primaryKey = "INVOICEID";
+    protected $primaryKey = "invoiceid";
     static $rules = [
-        'INVOICEID' => 'required',
+        'invoiceid' => 'required',
     ];
 
     protected $perPage = 20;
@@ -21,7 +21,7 @@ class SalesInvoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['INVOICEID', 'EMPLOYEEID', 'SALEDATE', 'CUSTOMERID', 'TOTALAMOUNT'];
+    protected $fillable = ['invoiceid', 'employeeid', 'saledate', 'customerid', 'totalamount'];
 
 
     public function salesinvoicedetail()

@@ -27,11 +27,12 @@ Route::post('/login', [\App\Http\Controllers\AdminAuthController::class, 'login'
 Route::post('/logout', [\App\Http\Controllers\AdminAuthController::class, 'logout'])->name('admin.logout');
 
 // crud dễ
-Route::resource('/color', \App\Http\Controllers\admin\CategoryController::class);
-Route::resource('/glaze', \App\Http\Controllers\admin\CategoryController::class);
+Route::resource('/color', \App\Http\Controllers\admin\ColorController::class);
+Route::resource('/glaze', \App\Http\Controllers\admin\GlazeController::class);
 Route::resource('/category', \App\Http\Controllers\admin\CategoryController::class);
-Route::resource('/size', \App\Http\Controllers\admin\CategoryController::class);
-Route::resource('/job', \App\Http\Controllers\admin\CategoryController::class);
+Route::resource('/size', \App\Http\Controllers\admin\SizeController::class);
+Route::resource('/job', \App\Http\Controllers\admin\JobController::class);
+Route::resource('/country', \App\Http\Controllers\admin\CountryController::class);
 
 // crud hơi dài
 Route::resource('/supplier', \App\Http\Controllers\admin\SupplierController::class);

@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = "PRODUCT";
-    protected $primaryKey = "PRODUCTID";
+    protected $primaryKey = "productid";
 
     public $timestamps = false;
 
     static $rules = [
-		'PRODUCTNAME' => 'required',
-        'PURCHASEPRICE' => 'required',
-        'SELLINGPRICE' => 'required',
-        'WEIGHT' => 'required',
-        'TYPE' => 'required',
-        'QUANTITY' => 'required'
+		'productname' => 'required',
+        'purchaseprice' => 'required',
+        'sellingprice' => 'required',
+        'weight' => 'required',
+        'type' => 'required',
+        'quantity' => 'required'
     ];
 
     protected $perPage = 20;

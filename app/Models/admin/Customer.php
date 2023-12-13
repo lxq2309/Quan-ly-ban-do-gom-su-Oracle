@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $table = "CUSTOMER";
-    protected $primaryKey = "CUSTOMERID";
+    protected $primaryKey = "customerid";
     static $rules = [
-        'CUSTOMERNAME' => 'required',
+        'customername' => 'required',
     ];
 
     protected $perPage = 20;

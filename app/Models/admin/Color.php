@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Color extends Model
 {
     protected $table = "COLOR";
-    protected $primaryKey = "COLORID";
+    protected $primaryKey = "colorid";
     static $rules = [
-        'COLORNAME' => 'required',
+        'colorname' => 'required',
     ];
 
     protected $perPage = 20;
