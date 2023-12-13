@@ -4,51 +4,35 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Bookset
- *
- * @property $SetID
- * @property $SetTitle
- * @property $SetNumber
- * @property $SetAvatar
- * @property $CreatedDate
- * @property $CreatedBy
- * @property $ModifiedDate
- * @property $ModifiedBy
- *
- * @property Book[] $books
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
-class Bookset extends Model
+
+class Productset extends Model
 {
-    protected $table = "BookSet";
-    protected $primaryKey = "SetID";
+    protected $table = "PRODUCTSET";
+    protected $primaryKey = "SETID";
 
     static $rules = [
-        'SetTitle' => 'required',
-        'SetAvatar' => 'image|mimes:jpeg,png,jpg,gif'
+        'SETNAME' => 'required',
+        'IMAGE' => 'image|mimes:jpeg,png,jpg,gif'
     ];
 
     protected $perPage = 20;
 
-    const CREATED_AT = "CreatedDate";
-    const UPDATED_AT = "ModifiedDate";
+    public $timestamps = false;
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['SetTitle', 'SetAvatar', 'Description', 'CreatedBy', 'ModifiedBy'];
+    protected $fillable = ['SETNAME', 'IMAGE', 'NOTE'];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function books()
+    public function productsetdetail()
     {
-        return $this->hasMany('App\Models\admin\Book', 'SetID', 'SetID');
+        return $this->hasMany('App\Models\admin\ProductsetDetail', 'setid', 'setid');
     }
 
 

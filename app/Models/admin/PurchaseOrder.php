@@ -27,11 +27,11 @@ class PurchaseOrder extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function purchaseorderdetail()
     {
-        return $this->hasMany('App\Models\admin\PurchaseOrderDetail', 'ORDERID', 'ORDERID');
+        return $this->hasMany('App\Models\admin\PurchaseOrderDetail', 'orderid', 'orderid');
     }
 
     /**
@@ -39,7 +39,7 @@ class PurchaseOrder extends Model
      */
     public function supplier()
     {
-        return $this->hasOne('App\Models\admin\Supplier', 'SUPPLIERID', 'SUPPLIERID');
+        return $this->hasOne('App\Models\admin\Supplier', 'supplierid', 'supplierid');
     }
 
     public function getTotalAmountAttribute()

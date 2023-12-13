@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    User
+    Nhân viên
 @endsection
 
 @section('content')
@@ -61,7 +61,7 @@
                                             <td>{{ $user->address }}</td>
                                             <td>{{ $user->username }}</td>
                                             <td>{{ $user->job->jobtitle }}</td>
-                                           
+
 
                                             <td style="position: absolute; right: 0; display: none">
 

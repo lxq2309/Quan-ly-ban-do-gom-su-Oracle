@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Size extends Model
 {
-    protected $table = "SIZE";
+    protected $table = "GOMSU_SIZE";
     protected $primaryKey = "SIZEID";
     static $rules = [
         'SIZENAME' => 'required',
@@ -24,7 +24,7 @@ class Size extends Model
      */
     public function products()
     {
-        return $this->hasMany('App\Models\admin\Product', 'SIZEID', 'SIZEID');
+        return $this->hasMany('App\Models\admin\Product', 'sizeid', 'sizeid');
     }
 
 }

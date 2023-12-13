@@ -24,6 +24,6 @@ class Customer extends Model
      */
     public function salesinvoices()
     {
-        return $this->hasMany('App\Models\admin\SalesInvoice', 'CUSTOMERID', 'CUSTOMERID');
+        return $this->hasMany('App\Models\admin\SalesInvoice', 'customerid', 'customerid');
     }
 }

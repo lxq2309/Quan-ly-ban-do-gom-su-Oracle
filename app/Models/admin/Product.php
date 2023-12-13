@@ -31,7 +31,7 @@ class Product extends Model
      */
     public function productimages()
     {
-        return $this->hasMany('App\Models\admin\ProductImage', 'PRODUCTID', 'PRODUCTID');
+        return $this->hasMany('App\Models\admin\ProductImage', 'productid', 'productid');
     }
 
     /**
@@ -39,7 +39,7 @@ class Product extends Model
      */
     public function productset()
     {
-        return $this->hasOne('App\Models\admin\Productset', 'SETID', 'SETID');
+        return $this->hasOne('App\Models\admin\Productset', 'setid', 'setid');
     }
 
     /**
@@ -47,7 +47,7 @@ class Product extends Model
      */
     public function color()
     {
-        return $this->hasOne('App\Models\admin\Color', 'COLORID', 'COLORID');
+        return $this->hasOne('App\Models\admin\Color', 'colorid', 'colorid');
     }
 
     /**
@@ -55,7 +55,7 @@ class Product extends Model
      */
     public function glaze()
     {
-        return $this->hasOne('App\Models\admin\Color', 'GLAZEID', 'GLAZEID');
+        return $this->hasOne('App\Models\admin\Color', 'glazeid', 'glazeid');
     }
 
     /**
@@ -63,7 +63,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->hasOne('App\Models\admin\Color', 'CATEGORYID', 'CATEGORYID');
+        return $this->hasOne('App\Models\admin\Color', 'categoryid', 'categoryid');
     }
 
     /**
@@ -71,7 +71,7 @@ class Product extends Model
      */
     public function size()
     {
-        return $this->hasOne('App\Models\admin\Color', 'SIZEID', 'SIZEID');
+        return $this->hasOne('App\Models\admin\Color', 'sizeid', 'sizeid');
     }
 
     /**
@@ -79,7 +79,7 @@ class Product extends Model
      */
     public function country()
     {
-        return $this->hasOne('App\Models\admin\Country', 'COUNTRYID', 'COUNTRYID');
+        return $this->hasOne('App\Models\admin\Country', 'countryid', 'countryid');
     }
 
     /**
@@ -87,7 +87,7 @@ class Product extends Model
      */
     public function purchaseorderdetails()
     {
-        return $this->hasMany('App\Models\admin\PurchaseOrderDetail', 'PRODUCTID', 'PRODUCTID');
+        return $this->hasMany('App\Models\admin\PurchaseOrderDetail', 'productid', 'productid');
     }
 
 
@@ -96,7 +96,7 @@ class Product extends Model
      */
     public function invoicedetails()
     {
-        return $this->hasMany('App\Models\admin\InvoiceDetail', 'PRODUCTID', 'PRODUCTID');
+        return $this->hasMany('App\Models\admin\InvoiceDetail', 'productid', 'productid');
     }
 
     public function getPurchasePriceAttribute()

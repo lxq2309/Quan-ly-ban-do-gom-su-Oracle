@@ -26,13 +26,13 @@ class SalesInvoice extends Model
 
     public function salesinvoicedetail()
     {
-        return $this->hasMany('App\Models\admin\InvoiceDetail', 'INVOICEID', 'INVOICEID');
+        return $this->hasMany('App\Models\admin\InvoiceDetail', 'invoiceid', 'invoiceid');
     }
 
 
     public function employee()
     {
-        return $this->hasOne('App\Models\admin\Employee', 'EMPLOYEEID', 'EMPLOYEEID');
+        return $this->hasOne('App\Models\admin\Employee', 'employeeid', 'employeeid');
     }
 
 

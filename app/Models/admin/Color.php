@@ -24,7 +24,7 @@ class Color extends Model
      */
     public function products()
     {
-        return $this->hasMany('App\Models\admin\Product', 'COLORID', 'COLORID');
+        return $this->hasMany('App\Models\admin\Product', 'colorid', 'colorid');
     }
 
 }

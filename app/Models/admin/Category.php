@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $table = "GomSu.Category";
+    protected $table = "GOMSU_CATEGORY";
     protected $primaryKey = "CATEGORYID";
     static $rules = [
         'CATEGORYNAME' => 'required',
@@ -28,7 +28,7 @@ class Category extends Model
      */
     public function products()
     {
-        return $this->hasMany('App\Models\admin\Product', 'CATEGORYID', 'CATEGORYID');
+        return $this->hasMany('App\Models\admin\Product', 'categoryid', 'categoryid');
     }
 
     /**
@@ -36,7 +36,7 @@ class Category extends Model
      */
     public function childcategories()
     {
-        return $this->hasMany('App\Models\admin\Category', 'CATEGORYID', 'CATEGORYID');
+        return $this->hasMany('App\Models\admin\Category', 'categoryid', 'categoryid');
     }
 
     /**
@@ -44,6 +44,6 @@ class Category extends Model
      */
     public function parentcategory()
     {
-        return $this->hasOne('App\Models\admin\Category', 'CATEGORYID', 'CATEGORYID');
+        return $this->hasOne('App\Models\admin\Category', 'categoryid', 'categoryid');
     }
 }

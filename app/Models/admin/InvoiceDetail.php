@@ -19,12 +19,12 @@ class InvoiceDetail extends Model
 
     public function product()
     {
-        return $this->hasOne('App\Models\admin\Product', 'PRODUCTID', 'PRODUCTID');
+        return $this->hasOne('App\Models\admin\Product', 'productid', 'productid');
     }
 
     public function salesinvoice()
     {
-        return $this->hasOne('App\Models\admin\SalesInvoice', 'INVOICEID', 'INVOICEID');
+        return $this->hasOne('App\Models\admin\SalesInvoice', 'invoiceid', 'invoiceid');
     }
 
     public function getPriceAttribute()

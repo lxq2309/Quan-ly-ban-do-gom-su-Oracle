@@ -24,7 +24,7 @@ class Country extends Model
      */
     public function products()
     {
-        return $this->hasMany('App\Models\admin\Product', 'COUNTRYID', 'COUNTRYID');
+        return $this->hasMany('App\Models\admin\Product', 'countryid', 'countryid');
     }
 
 }

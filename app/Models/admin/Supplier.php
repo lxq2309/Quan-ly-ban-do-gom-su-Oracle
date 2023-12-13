@@ -24,6 +24,6 @@ class Supplier extends Model
      */
     public function purchaseorders()
     {
-        return $this->hasMany('App\Models\admin\PurchaseOrder', 'SUPPLIERID', 'SUPPLIERID');
+        return $this->hasMany('App\Models\admin\PurchaseOrder', 'supplierid', 'supplierid');
     }
 }

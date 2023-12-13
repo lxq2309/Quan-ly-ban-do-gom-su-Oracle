@@ -24,7 +24,7 @@ class Glaze extends Model
      */
     public function products()
     {
-        return $this->hasMany('App\Models\admin\Product', 'GLAZEID', 'GLAZEID');
+        return $this->hasMany('App\Models\admin\Product', 'glazeid', 'glazeid');
     }
 
 }

@@ -31,7 +31,7 @@ class PurchaseOrderDetail extends Model
      */
     public function product()
     {
-        return $this->hasOne('App\Models\admin\Product', 'PRODUCTID', 'PRODUCTID');
+        return $this->hasOne('App\Models\admin\Product', 'productid', 'productid');
     }
 
     /**
@@ -39,7 +39,7 @@ class PurchaseOrderDetail extends Model
      */
     public function purchaseorder()
     {
-        return $this->hasOne('App\Models\admin\PurchaseOrder', 'ORDERID', 'ORDERID');
+        return $this->hasOne('App\Models\admin\PurchaseOrder', 'orderid', 'orderid');
     }
 
     public function getPriceAttribute()

@@ -20,12 +20,14 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $users = Employee::query();
-        if ($request->has('search'))
-        {
+        if ($request->has('search')) {
             $searchText = $request->input('search');
             $users->where('PhoneNumber', 'LIKE', "%$searchText%");
         }
-        
+
+
+
+
         $users = $users->paginate();
         return view('admin.employee.index', compact('users'))
             ->with('i', ($users->currentPage() - 1) * $users->perPage());
@@ -38,7 +40,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $user = new User();
+        $user = new Employee();
         return view('admin.employee.create', compact('user'));
     }
 
@@ -50,9 +52,9 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(User::$rules);
+        request()->validate(Employee::$rules);
 
-        $user = User::create($request->all());
+        $user = Employee::create($request->all());
 
         return redirect()->route('employee.index')
             ->with('success', 'User created successfully.');
@@ -66,7 +68,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = Employee::find($id);
 
         return view('admin.employee.show', compact('user'));
     }
@@ -79,7 +81,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = Employee::find($id);
 
         return view('admin.employee.edit', compact('user'));
     }
@@ -91,9 +93,9 @@ class EmployeeController extends Controller
      * @param  \App\Models\admin\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Employee $user)
     {
-        request()->validate(User::$rules);
+        request()->validate(Employee::$rules);
 
         $user->update($request->all());
 
@@ -108,13 +110,14 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        $user = Employee::find($id)->delete();
 
         return redirect()->route('employee.index')
             ->with('success', 'User deleted successfully');
     }
 
-    function getAll(){
-        return response()->json(User::all());
+    function getAll()
+    {
+        return response()->json(Employee::all());
     }
 }

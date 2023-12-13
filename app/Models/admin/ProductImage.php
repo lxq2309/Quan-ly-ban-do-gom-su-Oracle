@@ -4,24 +4,12 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class BookImage
- *
- * @property $ImageID
- * @property $BookID
- * @property $ImagePath
- * @property $Description
- *
- * @property Book $book
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
-class BookImage extends Model
+class ProductImage extends Model
 {
-    protected $table = "BookImage";
-    protected $primaryKey = "ImageID";
+    protected $table = "PRODUCTIMAGE";
+    protected $primaryKey = "IMAGEID";
     static $rules = [
-        'ImageID' => 'required',
+        'IMAGEID' => 'required',
     ];
 
     protected $perPage = 20;
@@ -31,7 +19,7 @@ class BookImage extends Model
      *
      * @var array
      */
-    protected $fillable = ['ImageID', 'BookID', 'ImagePath', 'Description'];
+    protected $fillable = ['IMAGEID', 'PRODUCTID', 'ImagePath'];
 
     public $timestamps = false;
 
@@ -39,9 +27,9 @@ class BookImage extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function book()
+    public function product()
     {
-        return $this->hasOne('App\Models\admin\Book', 'BookID', 'BookID');
+        return $this->hasOne('App\Models\admin\Product', 'productid', 'productid');
     }
 
 

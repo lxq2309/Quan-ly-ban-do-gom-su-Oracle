@@ -15,33 +15,47 @@ class Employee extends Model implements Authenticatable
 
     protected $perPage = 20;
 
+    static $rules = [
+        'PHONENUMBER' => 'required',
+        'EMPLOYEENAME' => 'required',
+        'USERNAME' => 'required'
+    ];
+
     /**
      * Get the name of the unique identifier for the user.
      *
      * @return string
      */
-    public function getAuthIdentifierName() {}
+    public function getAuthIdentifierName()
+    {
+    }
 
     /**
      * Get the unique identifier for the user.
      *
      * @return mixed
      */
-    public function getAuthIdentifier() {}
+    public function getAuthIdentifier()
+    {
+    }
 
     /**
      * Get the password for the user.
      *
      * @return string
      */
-    public function getAuthPassword() {}
+    public function getAuthPassword()
+    {
+    }
 
     /**
      * Get the token value for the "remember me" session.
      *
      * @return string
      */
-    public function getRememberToken() {}
+    public function getRememberToken()
+    {
+    }
 
     /**
      * Set the token value for the "remember me" session.
@@ -49,24 +63,21 @@ class Employee extends Model implements Authenticatable
      * @param  string  $value
      * @return void
      */
-    public function setRememberToken($value) {}
+    public function setRememberToken($value)
+    {
+    }
 
     /**
      * Get the column name for the "remember me" token.
      *
      * @return string
      */
-    public function getRememberTokenName() {}
+    public function getRememberTokenName()
+    {
+    }
 
     public function job()
     {
-        return dd($this->hasOne('App\Models\admin\Job', 'JOBID', 'JOBID'));
-    }
-
-    public function jobtitle(){
-        $result = Job::where('JOBID', $this->jobid)->first();
-        if($result){
-            return $result->title;
-        }
+        return $this->hasOne('App\Models\admin\Job', 'jobid', 'jobid');
     }
 }
