@@ -46,7 +46,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Admin Login') }}</div>
+                <div class="card-header">{{ __('Đăng nhập') }}</div>
 
                 <div class="card-body">
                     @if ($errors->any())
@@ -63,8 +63,8 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">{{ __('Email') }}</label>
-                            <input type="email" name="email" class="form-control" required>
+                            <label for="username">{{ __('Username') }}</label>
+                            <input type="text" name="username" class="form-control" required>
                         </div>
 
                         <div class="form-group">

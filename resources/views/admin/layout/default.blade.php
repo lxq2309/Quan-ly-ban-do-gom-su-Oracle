@@ -46,40 +46,11 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="/" class="nav-link">Xem trang bán hàng</a>
-            </li>
+            
         </ul>
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 đơn hàng đang chờ duyệt</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">Xem tất cả</a>
-                </div>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button" title="Hiển thị toàn màn hình">
                     <i class="fas fa-expand-arrows-alt"></i>
@@ -156,18 +127,10 @@
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="{{ route("user.index") }}" class="nav-link {{ set_active('user.*') }}">
+                                <a href="{{ route("employee.index") }}" class="nav-link {{ set_active('employee.*') }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Người dùng
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route("admin.index") }}" class="nav-link {{ set_active('admin.*') }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Quản trị viên
                                     </p>
                                 </a>
                             </li>
@@ -177,35 +140,34 @@
                         <a href="#" class="nav-link">
                             <i class="fa-solid fa-book"></i>
                             <p>
-                                Quản lý sách
+                                Quản lý sản phẩm
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="{{ route("book.index") }}" class="nav-link {{ set_active('book.*') }}">
+                                <a href="{{ route("product.index") }}" class="nav-link {{ set_active('book.*') }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
-                                        Sách
+                                        Sản phẩm
                                     </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route("bookset.index") }}" class="nav-link {{ set_active('bookset.*') }}">
+                                <a href="{{ route("productset.index") }}" class="nav-link {{ set_active('bookset.*') }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
-                                        Bộ sách
+                                        Bộ sản phẩm
                                     </p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("publisher.index") }}" class="nav-link {{ set_active('publisher.*') }}">
+                        <a href="{{ route("customer.index") }}" class="nav-link {{ set_active('publisher.*') }}">
                             <i class="fa-solid fa-newspaper"></i>
                             <p>
-                                Nhà xuất bản
-
+                                Khách hàng
                             </p>
                         </a>
                     </li>
@@ -218,27 +180,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("coupon.index") }}" class="nav-link {{ set_active('coupon.*') }}">
-                            <i class="fa-solid fa-tag"></i>
-                            <p>
-                                Mã giảm giá
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route("category.index") }}" class="nav-link {{ set_active('category.*') }}">
                             <i class="fa-solid fa-bars"></i>
                             <p>
                                 Danh mục
-
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route("genre.index") }}" class="nav-link {{ set_active('genre.*') }}">
-                            <i class="fa-solid fa-bars-staggered"></i>
-                            <p>
-                                Thể loại
 
                             </p>
                         </a>
@@ -263,8 +208,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route("sales-order.index") }}"
-                                   class="nav-link {{ set_active('sales-order.*') }}">
+                                <a href="{{ route("sales-invoice.index") }}"
+                                   class="nav-link {{ set_active('sales-invoice.*') }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
                                         Hoá đơn bán

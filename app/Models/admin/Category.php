@@ -4,46 +4,39 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Category
- *
- * @property $CategoryID
- * @property $CategoryName
- * @property $CreatedDate
- * @property $CreatedBy
- * @property $ModifiedDate
- * @property $ModifiedBy
- *
- * @property Genre[] $genres
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Category extends Model
 {
-  protected $table = "Category";
-  protected $primaryKey = "CategoryID";
-  static $rules = [
-    'CategoryName' => 'required',
-  ];
+    protected $table = "GomSu.Category";
+    protected $primaryKey = "CATEGORYID";
+    static $rules = [
+        'CATEGORYNAME' => 'required',
+    ];
 
-  protected $perPage = 20;
+    protected $perPage = 20;
 
-    const CREATED_AT = "CreatedDate";
-    const UPDATED_AT = "ModifiedDate";
+    public $timestamps = false;
 
-  /**
-   * Attributes that should be mass-assignable.
-   *
-   * @var array
-   */
-  protected $fillable = ['CategoryName', 'CreatedBy', 'ModifiedBy'];
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['CATEGORYNAME', 'PARENTID'];
 
 
-  /**
-   * @return \Illuminate\Database\Eloquent\Relations\HasMany
-   */
-  public function genres()
-  {
-    return $this->hasMany('App\Models\admin\Genre', 'CategoryID', 'CategoryID');
-  }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function childcategories()
+    {
+        return $this->hasMany('App\Models\admin\Category', 'CATEGORYID', 'CATEGORYID');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function parentcategory()
+    {
+        return $this->hasOne('App\Models\admin\Category', 'CATEGORYID', 'CATEGORYID');
+    }
 }

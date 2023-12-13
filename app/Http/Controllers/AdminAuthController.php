@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\admin\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,16 +18,16 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
         $remember = $request->has('remember');
-        $admin = Admin::where('Email', $credentials['email'])->first();
+        $admin = Employee::where('USERNAME', $credentials['username'])->first();
 
-        if ($admin && Hash::check($credentials['password'], $admin->Password)) {
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
             Auth::guard('admin')->login($admin, $remember);
 
             // Lưu thông tin người dùng vào session
-            session(['admin_id' => $admin->AdminID, 'admin_name' => $admin->FullName]);
-            return redirect()->intended('/admin');
+            session(['admin_id' => $admin->username, 'admin_name' => $admin->employeename]);
+            return redirect()->intended('/');
         }
 
         return back()->withErrors(['User' => 'Sai thông tin tài khoản hoặc mật khẩu!']);
@@ -37,6 +38,6 @@ class AdminAuthController extends Controller
         // Xóa thông tin người dùng khỏi session
         session()->forget(['admin_id', 'admin_name']);
         Auth::guard('admin')->logout();
-        return redirect('/admin/login');
+        return redirect('/login');
     }
 }

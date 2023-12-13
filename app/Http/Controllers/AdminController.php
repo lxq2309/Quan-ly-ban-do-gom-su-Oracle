@@ -16,14 +16,14 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $usersCount = User::all()->count();
-        $booksCount = Book::all()->count();
-        $suppliersCount = Supplier::all()->count();
-        $publishersCount = Publisher::all()->count();
-        $adminsCount = Admin::all()->count();
-        $purchaseOrdersCount = PurchaseOrder::all()->count();
-        $salesOrdersCount = SalesOrder::all()->where('OrderStatus','=','Đã hoàn thành')->count();
-        $couponsCount = Coupon::all()->where('IsUsed', '=', false)->where('ExpiryDate', '<', now())->count();
+        $usersCount = 1;
+        $booksCount = 2;
+        $suppliersCount = 3;
+        $publishersCount = 4;
+        $adminsCount = 5;
+        $purchaseOrdersCount = 6;
+        $salesOrdersCount = 8;
+        $couponsCount = 9;
         return view('admin.index', compact('usersCount', 'booksCount', 'suppliersCount', 'publishersCount', 'adminsCount', 'purchaseOrdersCount', 'salesOrdersCount', 'couponsCount'));
     }
 }

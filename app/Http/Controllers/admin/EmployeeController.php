@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\admin\Employee;
 use App\Models\admin\User;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
  * Class UserController
  * @package App\Http\Controllers
  */
-class UserController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,21 +19,15 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::query();
+        $users = Employee::query();
         if ($request->has('search'))
         {
             $searchText = $request->input('search');
-            $users->where('Email', 'LIKE', "%$searchText%");
+            $users->where('PhoneNumber', 'LIKE', "%$searchText%");
         }
-        $orderBy = ($request->has('order') && $request->input('order') == 'asc') ? 'desc' : 'asc';
-        if (empty($request->input('order')))
-        {
-            $orderBy = 'desc';
-        }
-        $users->orderBy('UserID', $orderBy);
-        $orderBy = ($request->has('order') && $request->input('order') == 'asc') ? 'desc' : 'asc';
-        $users = $users->paginate()->appends(['order' => $orderBy]);
-        return view('admin.user.index', compact('users'))
+        
+        $users = $users->paginate();
+        return view('admin.employee.index', compact('users'))
             ->with('i', ($users->currentPage() - 1) * $users->perPage());
     }
 
@@ -44,7 +39,7 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        return view('admin.user.create', compact('user'));
+        return view('admin.employee.create', compact('user'));
     }
 
     /**
@@ -59,7 +54,7 @@ class UserController extends Controller
 
         $user = User::create($request->all());
 
-        return redirect()->route('user.index')
+        return redirect()->route('employee.index')
             ->with('success', 'User created successfully.');
     }
 
@@ -73,7 +68,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return view('admin.user.show', compact('user'));
+        return view('admin.employee.show', compact('user'));
     }
 
     /**
@@ -86,7 +81,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return view('admin.user.edit', compact('user'));
+        return view('admin.employee.edit', compact('user'));
     }
 
     /**
@@ -102,7 +97,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('user.index')
+        return redirect()->route('employee.index')
             ->with('success', 'User updated successfully');
     }
 
@@ -115,7 +110,7 @@ class UserController extends Controller
     {
         $user = User::find($id)->delete();
 
-        return redirect()->route('user.index')
+        return redirect()->route('employee.index')
             ->with('success', 'User deleted successfully');
     }
 

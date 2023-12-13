@@ -4,25 +4,13 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class PurchaseOrder
- *
- * @property $OrderID
- * @property $OrderDate
- * @property $SupplierID
- * @property $TotalPrice
- *
- * @property Purchaseorderdetail $purchaseorderdetail
- * @property Supplier $supplier
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
+
 class PurchaseOrder extends Model
 {
-    protected $table = "PurchaseOrder";
-    protected $primaryKey = "OrderID";
+    protected $table = "PURCHASEORDER";
+    protected $primaryKey = "ORDERID";
     static $rules = [
-        'OrderDate' => 'required',
+        'ORDERID' => 'required',
 
     ];
 
@@ -35,7 +23,7 @@ class PurchaseOrder extends Model
      *
      * @var array
      */
-    protected $fillable = ['OrderDate', 'SupplierID', 'TotalPrice'];
+    protected $fillable = ['ORDERID', 'EMPLOYEEID', 'ORDERDATE', 'SUPPLIERID'];
 
 
     /**
@@ -43,7 +31,7 @@ class PurchaseOrder extends Model
      */
     public function purchaseorderdetail()
     {
-        return $this->hasMany('App\Models\admin\PurchaseOrderDetail', 'OrderID', 'OrderID');
+        return $this->hasMany('App\Models\admin\PurchaseOrderDetail', 'ORDERID', 'ORDERID');
     }
 
     /**
@@ -51,20 +39,20 @@ class PurchaseOrder extends Model
      */
     public function supplier()
     {
-        return $this->hasOne('App\Models\admin\Supplier', 'SupplierID', 'SupplierID');
+        return $this->hasOne('App\Models\admin\Supplier', 'SUPPLIERID', 'SUPPLIERID');
     }
 
-    public function getTotalPriceAttribute()
+    public function getTotalAmountAttribute()
     {
-        if (empty($this->attributes['TotalPrice']))
+        if (empty($this->attributes['TOTALAMOUNT']))
         {
             return 0;
         }
-        return $this->attributes['TotalPrice'] * 1000;
+        return $this->attributes['TOTALAMOUNT'] * 1000;
     }
 
-    public function setTotalPriceAttribute($val)
+    public function setTotalAmountAttribute($val)
     {
-        $this->attributes['TotalPrice'] = $val / 1000;
+        $this->attributes['TOTALAMOUNT'] = $val / 1000;
     }
 }

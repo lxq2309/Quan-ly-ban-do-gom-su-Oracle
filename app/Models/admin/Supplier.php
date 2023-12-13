@@ -4,40 +4,19 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Supplier
- *
- * @property $SupplierID
- * @property $SupplierName
- * @property $IsActive
- * @property $CreatedDate
- * @property $CreatedBy
- * @property $ModifiedDate
- * @property $ModifiedBy
- *
- * @property Purchaseorder[] $purchaseorders
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Supplier extends Model
 {
-    protected $table = "Supplier";
-    protected $primaryKey = "SupplierID";
+    protected $table = "SUPPLIER";
+    protected $primaryKey = "SUPPLIERID";
     static $rules = [
-        'SupplierName' => 'required',
+        'SUPPLIERNAME' => 'required',
     ];
 
     protected $perPage = 20;
 
-    const CREATED_AT = "CreatedDate";
-    const UPDATED_AT = "ModifiedDate";
+    public $timestamps = false;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['SupplierName', 'IsActive', 'CreatedBy', 'ModifiedBy'];
+    protected $guarded = [];
 
 
     /**
@@ -45,8 +24,6 @@ class Supplier extends Model
      */
     public function purchaseorders()
     {
-        return $this->hasMany('App\Models\admin\PurchaseOrder', 'SupplierID', 'SupplierID');
+        return $this->hasMany('App\Models\admin\PurchaseOrder', 'SUPPLIERID', 'SUPPLIERID');
     }
-
-
 }

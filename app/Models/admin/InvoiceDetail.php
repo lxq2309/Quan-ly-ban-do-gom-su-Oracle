@@ -4,42 +4,27 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class PurchaseOrderDetail extends Model
+class InvoiceDetail extends Model
 {
-    protected $table = "PURCHASEORDERDETAIL";
-    protected $primaryKey = ["ORDERID", "PRODUCTID"];
+    protected $table = "INVOICEDETAIL";
+    protected $primaryKey = ["INVOICEID", "PRODUCTID"];
     public $incrementing = false;
     static $rules = [
-
+        'INVOICEID' => 'required',
+        'PRODUCTID' => 'required',
     ];
 
     protected $perPage = 20;
 
-    public $timestamps = false;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['ORDERID', 'PRODUCTID', 'QUANTITY', 'PRICE', 'DISCOUNT', 'TOTALAMOUNT'];
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function product()
     {
         return $this->hasOne('App\Models\admin\Product', 'PRODUCTID', 'PRODUCTID');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function purchaseorder()
+    public function salesinvoice()
     {
-        return $this->hasOne('App\Models\admin\PurchaseOrder', 'ORDERID', 'ORDERID');
+        return $this->hasOne('App\Models\admin\SalesInvoice', 'INVOICEID', 'INVOICEID');
     }
 
     public function getPriceAttribute()
@@ -69,4 +54,5 @@ class PurchaseOrderDetail extends Model
     {
         $this->attributes['TOTALAMOUNT'] = $val / 1000;
     }
+
 }
