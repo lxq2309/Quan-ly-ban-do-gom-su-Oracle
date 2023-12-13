@@ -23,6 +23,13 @@ class Category extends Model
      */
     protected $fillable = ['CATEGORYNAME', 'PARENTID'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany('App\Models\admin\Product', 'CATEGORYID', 'CATEGORYID');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
