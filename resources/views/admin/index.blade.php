@@ -10,7 +10,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $booksCount }}</h3>
+                    <h3>{{ $productsCount }}</h3>
 
                     <p>Sản Phẩm</p>
                 </div>
@@ -25,7 +25,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>{{$adminsCount}}</h3>
+                    <h3>{{$employeesCount}}</h3>
 
                     <p>Nhân Viên</p>
                 </div>
@@ -40,7 +40,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{ $usersCount }}</h3>
+                    <h3>{{ $productsetsCount }}</h3>
 
                     <p>Bộ Sản Phẩm</p>
                 </div>
@@ -55,7 +55,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{ $publishersCount }}</h3>
+                    <h3>{{ $customersCount }}</h3>
 
                     <p>Khách Hàng</p>
                 </div>
@@ -70,7 +70,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $salesOrdersCount }}</h3>
+                    <h3>{{ $salesInvoicesCount }}</h3>
 
                     <p>Đơn Hàng Đã Bán</p>
                 </div>
@@ -100,7 +100,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{ $couponsCount }}</h3>
+                    <h3>{{ $jobsCount }}</h3>
 
                     <p>Vị Trí Công Việc</p>
                 </div>
