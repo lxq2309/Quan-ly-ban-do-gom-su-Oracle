@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('category.update', $category->CategoryID) }}" role="form"
+                        <form method="POST" action="{{ route('category.update', $category->categoryid) }}" role="form"
                               enctype="multipart/form-data">
                             {{ method_field($method) }}
                             @csrf

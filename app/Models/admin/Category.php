@@ -36,7 +36,7 @@ class Category extends Model
      */
     public function childcategories()
     {
-        return $this->hasMany('App\Models\admin\Category', 'categoryid', 'categoryid');
+        return $this->hasMany('App\Models\admin\Category', 'parentid', 'categoryid');
     }
 
     /**
@@ -44,6 +44,6 @@ class Category extends Model
      */
     public function parentcategory()
     {
-        return $this->hasOne('App\Models\admin\Category', 'categoryid', 'categoryid');
+        return $this->hasOne('App\Models\admin\Category', 'categoryid', 'parentid');
     }
 }

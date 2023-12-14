@@ -18,20 +18,18 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::query();
-        if ($request->has('search'))
+        // Lọc các danh mục có danh mục con hoặc là danh mục root
+        $categoryHasChildIds = array();
+        foreach(Category::all() as $category)
         {
-            $searchText = $request->input('search');
-            $categories->where('CategoryName', 'LIKE', "%$searchText%");
+            if($category->childcategories->count() > 0 || $category->parentid == null)
+            {
+                $categoryHasChildIds[] = $category->categoryid;
+            }
         }
-        $orderBy = ($request->has('order') && $request->input('order') == 'asc') ? 'desc' : 'asc';
-        if (empty($request->input('order')))
-        {
-            $orderBy = 'desc';
-        }
-        $categories->orderBy('CategoryID', $orderBy);
-        $orderBy = ($request->has('order') && $request->input('order') == 'asc') ? 'desc' : 'asc';
-        $categories = $categories->paginate()->appends(['order' => $orderBy]);
+
+        // sắp xếp và phân trang
+        $categories = Category::whereIn('categoryid', $categoryHasChildIds)->orderBy('categoryid', 'desc')->paginate(10);
         return view('admin.category.index', compact('categories'))
             ->with('i', ($categories->currentPage() - 1) * $categories->perPage());
     }
@@ -44,7 +42,9 @@ class CategoryController extends Controller
     public function create()
     {
         $category = new Category();
-        return view('admin.category.create', compact('category'));
+        $parentCategories = Category::all();
+
+        return view('admin.category.create', compact('category', 'parentCategories'));
     }
 
     /**
@@ -86,8 +86,9 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
+        $parentCategories = Category::all();
 
-        return view('admin.category.edit', compact('category'));
+        return view('admin.category.edit', compact('category', 'parentCategories'));
     }
 
     /**
