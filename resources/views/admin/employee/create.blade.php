@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ __('Create') }} User
+    {{ __('Thêm nhân viên') }}
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} User</span>
+                        <span class="card-title">{{ __('Thêm nhân viên') }}</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('employee.store') }}"  role="form" enctype="multipart/form-data">

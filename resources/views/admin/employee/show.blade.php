@@ -11,58 +11,46 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} User</span>
+                            <span class="card-title">{{ __('Thông tin nhân viên') }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('employee.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('employee.index') }}"> {{ __('Trở lại') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
 
                         <div class="form-group">
-                            <strong>UserID:</strong>
-                            {{ $user->UserID }}
+                            <strong>Mã nhân viên:</strong>
+                            {{ $user->employeeid }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Tên nhân viên:</strong>
+                            {{ $user->employeename }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Giới tính:</strong>
+                            {{ $user->gender }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Ngày sinh:</strong>
+                            {{ $user->birthdate }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Số điện thoại:</strong>
+                            {{ $user->phonenumber }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Địa chỉ:</strong>
+                            {{ $user->address }}
                         </div>
                         <div class="form-group">
                             <strong>Username:</strong>
-                            {{ $user->UserName }}
+                            {{ $user->username }}
                         </div>
                         <div class="form-group">
-                            <strong>Password:</strong>
-                            {{ $user->password }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Email:</strong>
-                            {{ $user->email }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Firstname:</strong>
-                            {{ $user->FirstName }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Lastname:</strong>
-                            {{ $user->LastName }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Gender:</strong>
-                            {{ $user->Gender }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Phonenumber:</strong>
-                            {{ $user->PhoneNumber }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Dateofbirth:</strong>
-                            {{ $user->DateOfBirth }}
-                        </div>
-                        <div class="form-group">
-                            <strong>CreatedDate:</strong>
-                            {{ $user->CreatedDate }}
-                        </div>
-                        <div class="form-group">
-                            <strong>ModifiedDate:</strong>
-                            {{ $user->ModifiedDate }}
+                            <strong>Tên công việc:</strong>
+                            {{ $user->job?->jobtitle }}
                         </div>
                     </div>
                 </div>

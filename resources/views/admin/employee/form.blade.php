@@ -2,43 +2,48 @@
     <div class="box-body">
         <div class="form-group">
             {{ Form::label('UserName') }}
-            {{ Form::text('UserName', $user->UserName, ['class' => 'form-control' . ($errors->has('UserName') ? ' is-invalid' : ''), 'placeholder' => 'Username']) }}
-            {!! $errors->first('UserName', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::text('username', $user->username, ['class' => 'form-control' . ($errors->has('username') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+            {!! $errors->first('username', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('password') }}
-            {{ Form::text('password', $user->password, ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'Password']) }}
-            {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Họ và tên') }}
+            {{ Form::text('employeename', $user->employeename, ['class' => 'form-control' . ($errors->has('employeename') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+            {!! $errors->first('employeename', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('email') }}
-            {{ Form::text('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email']) }}
-            {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Số điện thoại') }}
+            {{ Form::text('phonenumber', $user->phonenumber, ['class' => 'form-control' . ($errors->has('phonenumber') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+            {!! $errors->first('phonenumber', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('FirstName') }}
-            {{ Form::text('FirstName', $user->FirstName, ['class' => 'form-control' . ($errors->has('FirstName') ? ' is-invalid' : ''), 'placeholder' => 'Firstname']) }}
-            {!! $errors->first('FirstName', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Ngày sinh') }}
+            {{ Form::date('birthdate', $user->birthdate, ['class' => 'form-control' . ($errors->has('birthdate') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+            {!! $errors->first('birthdate', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('LastName') }}
-            {{ Form::text('LastName', $user->LastName, ['class' => 'form-control' . ($errors->has('LastName') ? ' is-invalid' : ''), 'placeholder' => 'Lastname']) }}
-            {!! $errors->first('LastName', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Địa chỉ') }}
+            {{ Form::text('address', $user->address, ['class' => 'form-control' . ($errors->has('address') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+            {!! $errors->first('address', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('Gender') }}
-            {{ Form::text('Gender', $user->Gender, ['class' => 'form-control' . ($errors->has('Gender') ? ' is-invalid' : ''), 'placeholder' => 'Gender']) }}
-            {!! $errors->first('Gender', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Giới tính') }}
+            <select name="gender" class="form-control">
+                <option value="">Chưa xác định</option>
+                <option value="0">Nam</option>
+                <option value="1">Nữ</option>
+            </select>
         </div>
         <div class="form-group">
-            {{ Form::label('PhoneNumber') }}
-            {{ Form::text('PhoneNumber', $user->PhoneNumber, ['class' => 'form-control' . ($errors->has('PhoneNumber') ? ' is-invalid' : ''), 'placeholder' => 'Phonenumber']) }}
-            {!! $errors->first('PhoneNumber', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('DateOfBirth') }}
-            {{ Form::date('DateOfBirth', $user->DateOfBirth, ['class' => 'form-control' . ($errors->has('DateOfBirth') ? ' is-invalid' : ''), 'placeholder' => 'Dateofbirth']) }}
-            {!! $errors->first('DateOfBirth', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Vị trí công việc') }}
+            <select name="jobid" class="form-control">
+                <option value="">-- Chưa có --</option>
+                @foreach($jobs as $job)
+                    <option value="{{ $job->jobid }}"
+                        {{ $job->jobid == $user->jobid ? 'selected' : '' }}>
+                        {{ $job->jobtitle }}
+                    </option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="box-footer mt20">

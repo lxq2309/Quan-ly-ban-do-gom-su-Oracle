@@ -15,6 +15,10 @@
                         @endphp
 
                     </div>
+                    <a href="{{ route('employee.create') }}" class="btn btn-primary float-right"
+                       data-placement="left">
+                        {{ __('Thêm nhân viên mới') }}
+                    </a>
                     <div class="dataTables_filter" style="padding: 0; padding-top: 0.75rem">
                         <form id="searchForm" action="{{ route($routeName) }}" method="GET">
                             <div class="dataTables_filter" style="padding: 0; padding-top: 0.75rem">
@@ -64,7 +68,20 @@
 
 
                                             <td style="position: absolute; right: 0; display: none">
-
+                                                <div style="position: sticky;">
+                                                    <form action="{{ route('employee.destroy',$user->employeeid) }}"
+                                                          method="POST">
+                                                        <a class="btn btn-sm btn-primary "
+                                                           href="{{ route('employee.show',$user->employeeid) }}"><i
+                                                                class="fa fa-fw fa-eye"></i> {{ __('Xem chi tiết') }}
+                                                        </a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="fa fa-fw fa-trash"></i> {{ __('Xoá') }}
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

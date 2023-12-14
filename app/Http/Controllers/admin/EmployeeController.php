@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\admin\Employee;
+use App\Models\admin\Job;
 use App\Models\admin\User;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $user = new Employee();
-        return view('admin.employee.create', compact('user'));
+        $jobs = Job::all();
+        return view('admin.employee.create', compact('user', 'jobs'));
     }
 
     /**

@@ -21,6 +21,8 @@ class Employee extends Model implements Authenticatable
         'username' => 'required'
     ];
 
+    protected $guarded = [];
+
     /**
      * Get the name of the unique identifier for the user.
      *
