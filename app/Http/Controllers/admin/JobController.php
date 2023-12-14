@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Models\admin\Country;
+use App\Models\admin\Job;
 use Illuminate\Http\Request;
 
-class CountryController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,16 +14,16 @@ class CountryController extends Controller
      */
     public function index(Request $request)
     {
-        $countrys = Country::query();
+        $jobs = Job::query();
         if ($request->has('search'))
         {
             $searchText = $request->input('search');
-            $countrys->where('CountryName', 'LIKE', "%$searchText%");
+            $jobs->where('JobName', 'LIKE', "%$searchText%");
         }
 
-        $countrys = $countrys->paginate();
-        return view('admin.country.index', compact('countrys'))
-            ->with('i', ($countrys->currentPage() - 1) * $countrys->perPage());
+        $jobs = $jobs->paginate();
+        return view('admin.job.index', compact('jobs'))
+            ->with('i', ($jobs->currentPage() - 1) * $jobs->perPage());
     }
 
     /**
@@ -33,8 +33,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        $country = new Country();
-        return view('admin.country.create', compact('country'));
+        $job = new Job();
+        return view('admin.job.create', compact('job'));
     }
 
     /**
@@ -45,12 +45,12 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Country::$rules);
+        request()->validate(Job::$rules);
 
-        $country = Country::create($request->all());
+        $job = Job::create($request->all());
 
-        return redirect()->route('country.index')
-            ->with('success', 'Country created successfully.');
+        return redirect()->route('job.index')
+            ->with('success', 'Job created successfully.');
     }
 
     /**
@@ -61,9 +61,9 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $country = Country::find($id);
+        $job = Job::find($id);
 
-        return view('admin.country.show', compact('country'));
+        return view('admin.job.show', compact('job'));
     }
 
     /**
@@ -74,27 +74,27 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::find($id);
+        $job = Job::find($id);
 
-        return view('admin.country.edit', compact('country'));
+        return view('admin.job.edit', compact('job'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Models\admin\Country $country
+     * @param  \App\Models\admin\Job $job
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request, Job $job)
     {
-        request()->validate(Country::$rules);
+        request()->validate(Job::$rules);
 
 
-        $country->update($request->all());
+        $job->update($request->all());
 
-        return redirect()->route('country.index')
-            ->with('success', 'Country updated successfully');
+        return redirect()->route('job.index')
+            ->with('success', 'Job updated successfully');
     }
 
     /**
@@ -104,13 +104,13 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        $country = Country::find($id)->delete();
+        $job = Job::find($id)->delete();
 
-        return redirect()->route('country.index')
-            ->with('success', 'Country deleted successfully');
+        return redirect()->route('job.index')
+            ->with('success', 'Job deleted successfully');
     }
 
     function getAll(){
-        return response()->json(Country::all());
+        return response()->json(Job::all());
     }
 }

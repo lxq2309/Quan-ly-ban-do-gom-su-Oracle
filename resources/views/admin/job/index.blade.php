@@ -56,7 +56,7 @@
                                             <tr class="even" onmouseover="readListScripts.showTableActions()"
                                                 onmouseleave="readListScripts.hideTableActions()">
                                                 <td>{{ $job->jobid }}</td>
-                                                <td>{{ $job->jobname }}</td>
+                                                <td>{{ $job->jobtitle }}</td>
 
 
                                                 <td style="position: absolute; right: 0; display: none">

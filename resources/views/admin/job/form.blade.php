@@ -7,8 +7,8 @@
     <div class="box-body">
         <div class="form-group">
             {{ Form::label("Tên $name") }}
-            {{ Form::text('jobname', $job->jobname, ['class' => 'form-control' . ($errors->has('jobname') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('jobname', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::text('jobtitle', $job->jobtitle, ['class' => 'form-control' . ($errors->has('jobtitle') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('jobtitle', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>
