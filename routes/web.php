@@ -25,6 +25,7 @@ Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('
 Route::get('/login', [\App\Http\Controllers\AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/login', [\App\Http\Controllers\AdminAuthController::class, 'login']);
 Route::post('/logout', [\App\Http\Controllers\AdminAuthController::class, 'logout'])->name('admin.logout');
+Route::post('/change-password', [\App\Http\Controllers\AdminController::class, 'changePassword'])->name('admin.change_password');
 
 // crud dễ
 Route::resource('/color', \App\Http\Controllers\admin\ColorController::class);

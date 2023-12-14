@@ -82,4 +82,14 @@ class Employee extends Model implements Authenticatable
     {
         return $this->hasOne('App\Models\admin\Job', 'jobid', 'jobid');
     }
+
+    public function setPasswordAttribute($value)
+    {
+        // Kiểm tra xem mật khẩu đã được mã hóa hay chưa
+        if (Hash::needsRehash($value)) {
+            $this->attributes['password'] = bcrypt($value);
+        } else {
+            $this->attributes['password'] = $value;
+        }
+    }
 }

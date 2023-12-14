@@ -26,7 +26,7 @@ class AdminAuthController extends Controller
             Auth::guard('admin')->login($admin, $remember);
 
             // Lưu thông tin người dùng vào session
-            session(['admin_id' => $admin->username, 'admin_name' => $admin->employeename]);
+            session(['admin_id' => $admin->employeeid, 'admin_name' => $admin->employeename]);
             return redirect()->intended('/');
         }
 

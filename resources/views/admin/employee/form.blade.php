@@ -6,6 +6,10 @@
             {!! $errors->first('username', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
+            <label>Mật khẩu: <i style="color: red">123456</i></label>
+            <input type="hidden" name="password" value="123456">
+        </div>
+        <div class="form-group">
             {{ Form::label('Họ và tên') }}
             {{ Form::text('employeename', $user->employeename, ['class' => 'form-control' . ($errors->has('employeename') ? ' is-invalid' : ''), 'placeholder' => '']) }}
             {!! $errors->first('employeename', '<div class="invalid-feedback">:message</div>') !!}
