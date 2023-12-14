@@ -23,6 +23,16 @@ class Employee extends Model implements Authenticatable
 
     protected $guarded = [];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Áp dụng điều kiện WHERE deleted = 0 cho SELECT và UPDATE
+        static::addGlobalScope('softDelete', function ($builder) {
+            $builder->where('deleted', 0);
+        });
+    }
+
     /**
      * Get the name of the unique identifier for the user.
      *

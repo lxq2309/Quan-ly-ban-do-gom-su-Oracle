@@ -436,7 +436,7 @@
         }
     </script>
     @yield('exportToExcelScripts');
-    @yield('formBookScripts');
+    @yield('formProductScripts');
     @yield('formPurchaseOrderScripts');
 </body>
 

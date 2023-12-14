@@ -112,7 +112,9 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $user = Employee::find($id)->delete();
+        $user = Employee::find($id);
+        $user->deleted = 1;
+        $user->save();
 
         return redirect()->route('employee.index')
             ->with('success', 'User deleted successfully');

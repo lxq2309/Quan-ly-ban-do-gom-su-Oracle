@@ -117,7 +117,9 @@ class PurchaseOrderController extends Controller
      */
     public function destroy($id)
     {
-        $purchaseOrder = PurchaseOrder::find($id)->delete();
+        $purchaseOrder = PurchaseOrder::find($id);
+        $purchaseOrder->deleted = 1;
+        $purchaseOrder->save();
 
         return redirect()->route('purchase-order.index')
             ->with('success', 'Xoá hoá đơn thành công');

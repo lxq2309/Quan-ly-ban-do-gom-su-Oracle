@@ -21,28 +21,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin-dashboard');
 Route::get('/login', [\App\Http\Controllers\AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/login', [\App\Http\Controllers\AdminAuthController::class, 'login']);
+
+Route::group(['middleware' => 'admin'], function () {
+Route::get('/', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin-dashboard');
 Route::post('/logout', [\App\Http\Controllers\AdminAuthController::class, 'logout'])->name('admin.logout');
 Route::post('/change-password', [\App\Http\Controllers\AdminController::class, 'changePassword'])->name('admin.change_password');
-
-// crud dễ
 Route::resource('/color', \App\Http\Controllers\admin\ColorController::class);
 Route::resource('/glaze', \App\Http\Controllers\admin\GlazeController::class);
 Route::resource('/category', \App\Http\Controllers\admin\CategoryController::class);
 Route::resource('/size', \App\Http\Controllers\admin\SizeController::class);
 Route::resource('/job', \App\Http\Controllers\admin\JobController::class);
 Route::resource('/country', \App\Http\Controllers\admin\CountryController::class);
-
-// crud hơi dài
 Route::resource('/supplier', \App\Http\Controllers\admin\SupplierController::class);
 Route::resource('/customer', \App\Http\Controllers\admin\CustomerController::class);
-
 Route::resource('/employee', \App\Http\Controllers\admin\EmployeeController::class);
-
-// crud dài nhất
-Route::resource('/product', \App\Http\Controllers\admin\BookController::class);
-Route::resource('/productset', \App\Http\Controllers\admin\BooksetController::class);
+Route::resource('/product', \App\Http\Controllers\admin\ProductController::class);
+Route::resource('/productset', \App\Http\Controllers\admin\ProductsetController::class);
 Route::resource('/purchase-order', \App\Http\Controllers\admin\PurchaseOrderController::class);
 Route::resource('/sales-invoice', \App\Http\Controllers\admin\SalesInvoiceController::class);
+});

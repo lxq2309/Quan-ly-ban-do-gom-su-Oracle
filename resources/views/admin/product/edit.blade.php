@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ "Sửa thông tin sách $book->BookTitle" }}
+    {{ "Sửa thông tin sản phẩm $product->productname" }}
 @endsection
 
 @php
@@ -21,16 +21,16 @@
                             <span class="card-title">{{ __('Sửa thông tin') }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('book.index') }}"> {{ __('Trở lại') }}</a>
+                            <a class="btn btn-primary" href="{{ route('product.index') }}"> {{ __('Trở lại') }}</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('book.update', $book->BookID) }}" role="form"
+                        <form method="POST" action="{{ route('product.update', $product->productid) }}" role="form"
                               enctype="multipart/form-data">
                             {{ method_field($method) }}
                             @csrf
 
-                            @include('admin.book.form')
+                            @include('admin.product.form')
 
                         </form>
                     </div>

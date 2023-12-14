@@ -1,45 +1,29 @@
 <div class="box box-info padding-1">
     <div class="box-body">
         <div class="form-group required">
-            {{ Form::label('Tên sách') }}
-            {{ Form::text('BookTitle', $book->BookTitle, ['class' => 'form-control' . ($errors->has('BookTitle') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('BookTitle', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Tên sản phẩm') }}
+            {{ Form::text('productname', $product->productname, ['class' => 'form-control' . ($errors->has('productname') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('productname', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group required">
-            {{ Form::label('Tên tác giả') }}
-            {{ Form::text('Author', $book->Author, ['class' => 'form-control' . ($errors->has('Author') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('Author', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group required">
-            {{ Form::label('Nhà xuất bản') }}
-            <select name="PublisherID" class="form-control">
-                @foreach($publishers as $publisher)
-                    <option value="{{ $publisher->PublisherID }}"
-                        {{ $publisher->PublisherID == $book->PublisherID ? 'selected' : '' }}>
-                        {{ $publisher->PublisherName }}
-                    </option>
-                @endforeach
-            </select>
+            {{ Form::label('Giá nhập (VNĐ)') }}
+            {{ Form::number('purchaseprice', $product->purchaseprice, ['class' => 'form-control' . ($errors->has('purchaseprice') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('purchaseprice', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group required">
             {{ Form::label('Giá bán (VNĐ)') }}
-            {{ Form::number('CostPrice', $book->CostPrice, ['class' => 'form-control' . ($errors->has('CostPrice') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('CostPrice', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::number('sellingprice', $product->sellingprice, ['class' => 'form-control' . ($errors->has('sellingprice') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('sellingprice', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group required">
-            {{ Form::label('Giá khuyến mại (VNĐ)') }}
-            {{ Form::number('SellingPrice', $book->SellingPrice, ['class' => 'form-control' . ($errors->has('SellingPrice') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('SellingPrice', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group required">
-            {{ Form::label('Số trang') }}
-            {{ Form::number('PageCount', $book->PageCount, ['class' => 'form-control' . ($errors->has('PageCount') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('PageCount', '<div class="invalid-feedback">:message</div>') !!}
+        <div class="form-group">
+            {{ Form::label('Thời hạn bảo hành (tháng)') }}
+            {{ Form::number('warrantyperiod', $product->warrantyperiod, ['class' => 'form-control' . ($errors->has('warrantyperiod') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('warrantyperiod', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group required">
             {{ Form::label('Trọng lượng (gram)') }}
-            {{ Form::number('Weight', $book->Weight, ['class' => 'form-control' . ($errors->has('Weight') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('Weight', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::number('weight', $product->weight, ['class' => 'form-control' . ($errors->has('weight') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('weight', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('Ảnh đại diện') }}
@@ -56,68 +40,103 @@
             <div class="tab-content" id="myTabsContent">
                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                     <div class="form-group mt-4">
-                        <input type="text" class="form-control" name="AvatarUrl"
-                               placeholder="https://example.com/image.jpg" value="{{ $book->Avatar }}">
+                        <input type="text" class="form-control" name="imageurl"
+                               placeholder="https://example.com/image.jpg" value="{{ $product->image }}">
                     </div>
                 </div>
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                     <div class="form-group mt-4">
-                        <input type="file" class="form-control-file" name="Avatar" accept="image/*">
+                        <input type="file" class="form-control-file" name="image" accept="image/*">
                     </div>
                 </div>
             </div>
-            {!! $errors->first('Avatar', '<div class="invalid-feedback">:message</div>') !!}
+            {!! $errors->first('image', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group required">
-            {{ Form::label('Loại bìa') }}
-            <select name="CoverStyle" class="form-control">
+            {{ Form::label('Loại sản phẩm') }}
+            <select name="type" class="form-control">
                 <option
-                    value="0">-- Bìa cứng --
+                    value="0">-- Đồ gốm --
                 </option>
                 <option
-                    value="1" {{ ($method == 'PATCH' && $book->CoverStyle == 1) ? 'selected' : '' }}>-- Bìa mềm --
+                    value="1" {{ ($method == 'PATCH' && $product->type == 1) ? 'selected' : '' }}>-- Đồ sứ --
+                </option>
+                <option
+                    value="2" {{ ($method == 'PATCH' && $product->type == 2) ? 'selected' : '' }}>-- Đồ gốm sứ --
                 </option>
             </select>
         </div>
-        <div class="form-group">
-            {{ Form::label('Kích thước ([Chiều Dài]x[Chiều Rộng])') }}
-            {{ Form::text('Size', $book->Size, ['class' => 'form-control' . ($errors->has('Size') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('Size', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
         <div class="form-group required">
-            {{ Form::label('Năm xuất bản') }}
-            {{ Form::number('YearPublished', $book->YearPublished, ['class' => 'form-control' . ($errors->has('YearPublished') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('YearPublished', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Số lượng') }}
+            {{ Form::number('quantity', $product->quantity, ['class' => 'form-control' . ($errors->has('quantity') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('quantity', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('Mô tả') }}
-            {{ Form::textarea('Description', $book->Description, ['class' => 'form-control' . ($errors->has('Description') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('Description', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Mô tả, ghi chú') }}
+            {{ Form::textarea('note', $product->note, ['class' => 'form-control' . ($errors->has('note') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('note', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
         <div class="form-group">
-            {{ Form::label('Thể loại') }}
-            <div class="row">
-                @foreach($genres as $genre)
-                    <div class="col-md-2">
-                        <div class="form-check">
-                            <input type="checkbox" name="bookgenre[]" value="{{ $genre->GenreID }}"
-                                   {{ in_array($genre->GenreID, $selectedGenres) ? 'checked' : '' }} class="form-check-input">
-                            <label class="form-check-label">{{ $genre->GenreName }}</label>
-                        </div>
-                    </div>
+            {{ Form::label('Danh mục') }}
+            <select name="categoryid" class="form-control">
+                <option value="">-- Không thuộc danh mục nào --</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->categoryid }}"
+                        {{ $category->categoryid == $product->categoryid ? 'selected' : '' }}>
+                        {{ $category->categoryname }}
+                    </option>
                 @endforeach
-            </div>
+            </select>
         </div>
 
         <div class="form-group">
-            {{ Form::label('Thuộc bộ sách') }}
-            <select name="SetID" class="form-control">
-                <option value="">-- Không thuộc bộ nào --</option>
-                @foreach($bookSets as $bookSet)
-                    <option value="{{ $bookSet->SetID }}"
-                        {{ $bookSet->SetID == $book->SetID ? 'selected' : '' }}>
-                        {{ $bookSet->SetTitle }}
+            {{ Form::label('Kích thước') }}
+            <select name="sizeid" class="form-control">
+                <option value="">-- Chưa rõ --</option>
+                @foreach($sizes as $size)
+                    <option value="{{ $size->sizeid }}"
+                        {{ $size->sizeid == $product->sizeid ? 'selected' : '' }}>
+                        {{ $size->sizename }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('Loại men') }}
+            <select name="glazeid" class="form-control">
+                <option value="">-- Chưa rõ --</option>
+                @foreach($glazes as $glaze)
+                    <option value="{{ $glaze->glazeid }}"
+                        {{ $glaze->glazeid == $product->glazeid ? 'selected' : '' }}>
+                        {{ $glaze->glazename }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('Màu sắc') }}
+            <select name="colorid" class="form-control">
+                <option value="">-- Chưa rõ --</option>
+                @foreach($colors as $color)
+                    <option value="{{ $color->colorid }}"
+                        {{ $color->colorid == $product->colorid ? 'selected' : '' }}>
+                        {{ $color->colorname }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('Nước sản xuất') }}
+            <select name="countryid" class="form-control">
+                <option value="">-- Chưa rõ --</option>
+                @foreach($countries as $country)
+                    <option value="{{ $country->countryid }}"
+                        {{ $country->countryid == $product->countryid ? 'selected' : '' }}>
+                        {{ $country->countryname }}
                     </option>
                 @endforeach
             </select>
@@ -128,14 +147,14 @@
             <div class="row">
                 @foreach($images as $image)
                     <div class="col-3 position-relative image-items d-flex align-items-center justify-content-center">
-                        <img src="{{ $image->ImagePath }}" alt="{{ $image->Description }}" class="img-thumbnail rounded"
+                        <img src="{{ $image->imagepath }}" alt="{{ $image->note }}" class="img-thumbnail rounded"
                              style="max-width: 200px">
                         <div class="image-overlay">
-                            <div id="btnDeleteImage" data-imgid="{{ $image->ImageID }}" style="cursor: pointer;"><i
+                            <div id="btnDeleteImage" data-imgid="{{ $image->imageid }}" style="cursor: pointer;"><i
                                     class="fa fa-trash" aria-hidden="true"></i> Xoá
                             </div>
                         </div>
-                        <input type="hidden" name="ImagesIds[]" value="{{ $image->ImageID }}">
+                        <input type="hidden" name="imagesids[]" value="{{ $image->imageid }}">
                     </div>
 
                 @endforeach
@@ -170,22 +189,13 @@
             </div>
             {!! $errors->first('images', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
-        @switch($method)
-            @case('POST')
-                <input type="hidden" name="CreatedBy" value="{{ session('admin_name') }}">
-                @break
-            @case('PATCH')
-                <input type="hidden" name="ModifiedBy" value="{{ session('admin_name') }}">
-                @break
-        @endswitch
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">{{ __('Xác nhận') }}</button>
     </div>
 </div>
 
-@section('formBookScripts')
+@section('formProductScripts')
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('add-image-input').addEventListener('click', function () {

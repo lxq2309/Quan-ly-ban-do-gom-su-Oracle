@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ $book->BookTitle }}
+    {{ $product->productname }}
 @endsection
 
 @section('content')
@@ -11,11 +11,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Thông tin sách') }}</span>
+                            <span class="card-title">{{ __('Thông tin sản phẩm') }}</span>
                         </div>
                         <div class="float-right">
-                            <a href="{{ route('book.edit', $book->BookID) }}" class="btn btn-outline-primary"><i class="fa-solid fa-pen"></i> Sửa thông tin</a>
-                            <a class="btn btn-primary" href="{{ route('book.index') }}"> {{ __('Trở lại') }}</a>
+                            <a href="{{ route('product.edit', $product->productid) }}" class="btn btn-outline-primary"><i
+                                    class="fa-solid fa-pen"></i> Sửa thông tin</a>
+                            <a class="btn btn-primary" href="{{ route('product.index') }}"> {{ __('Trở lại') }}</a>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -27,105 +28,51 @@
                     <div class="card-body">
 
                         <div class="form-group">
-                            <img src="{{ $book->Avatar }}" alt="{{ $book->BookTitle }}" class="img-thumbnail rounded" style="max-width: 300px">
+                            <img src="{{ $product->image }}" alt="{{ $product->productname }}" class="img-thumbnail rounded"
+                                style="max-width: 300px">
                         </div>
 
                         <div class="form-group">
-                            <strong>BookID:</strong>
-                            {{ $book->BookID }}
+                            <strong>Mã sản phẩm:</strong> {{ $product->productid }}
                         </div>
                         <div class="form-group">
-                            <strong>Tên sách:</strong>
-                            {{ $book->BookTitle }}
+                            <strong>Tên sản phẩm:</strong> {{ $product->productname }}
                         </div>
                         <div class="form-group">
-                            <strong>Tác giả:</strong>
-                            {{ $book->Author }}
+                            <strong>Kiểu:</strong> {{ $product->type }}
                         </div>
                         <div class="form-group">
-                            <strong>Nhà xuất bản:</strong>
-
-                            <?php
-                            $publisherName = $book->publisher == null ? '' : $book->publisher->PublisherName;
-                            $publisherId = $book->publisher == null ? '' : $book->publisher->PublisherID;
-                            ?>
-                            <a href="#{{ $publisherId }}">{{ $publisherName }}</a>
+                            <strong>Giá nhập:</strong> {{ $product->purchaseprice }} VNĐ
                         </div>
                         <div class="form-group">
-                            <strong>Giá bán:</strong>
-                            {{ $book->CostPrice }} VNĐ
+                            <strong>Giá bán:</strong> {{ $product->sellingprice }} VNĐ
                         </div>
                         <div class="form-group">
-                            <strong>Giá khuyến mại:</strong>
-                            {{ $book->SellingPrice }} VNĐ
+                            <strong>Danh mục:</strong> {{ $product->category?->categoryname }}
                         </div>
                         <div class="form-group">
-                            <strong>Số lượng:</strong>
-                            {{ $book->QuantityInStock }}
+                            <strong>Kích thước:</strong> {{ $product->size?->sizename }} cm
                         </div>
                         <div class="form-group">
-                            <strong>Số trang:</strong>
-                            {{ $book->PageCount }}
+                            <strong>Loại men:</strong> {{ $product->glaze?->glazename }}
                         </div>
                         <div class="form-group">
-                            <strong>Trọng lượng:</strong>
-                            {{ $book->Weight }} gram
+                            <strong>Màu sắc:</strong> {{ $product->color?->colorname }}
                         </div>
                         <div class="form-group">
-                            <strong>Đường dẫn ảnh:</strong>
-                            {{ $book->Avatar }}
+                            <strong>Nước sản xuất:</strong> {{ $product->country?->countryname }}
                         </div>
                         <div class="form-group">
-                            <strong>Loại bìa:</strong>
-                            {{ $book->CoverStyle }}
+                            <strong>Số lượng:</strong> {{ $product->quantity }}
                         </div>
                         <div class="form-group">
-                            <strong>Kích thước:</strong>
-                            {{ $book->Size }} cm
+                            <strong>Trọng lượng:</strong> {{ $product->weight }}
                         </div>
                         <div class="form-group">
-                            <strong>Năm xuất bản:</strong>
-                            {{ $book->YearPublished }}
+                            <strong>Bảo hành:</strong> {{ $product->warrantyperiod }}
                         </div>
                         <div class="form-group">
-                            <strong>Thuộc bộ:</strong>
-                            <?php
-                            $setTitle = $book->bookset == null ? '' : $book->bookset->SetTitle;
-                            $setId = $book->bookset == null ? '' : $book->bookset->SetID;
-                            ?>
-                            <a href="#{{ $setId }}">{{ $setTitle }}</a>
-                        </div>
-                        <div class="form-group">
-                            <strong>Thể loại:</strong>
-                            @foreach($genres as $genre)
-                                <button type="button"
-                                        class="btn btn-outline-primary btn-sm">{{ $genre->GenreName }}</button>
-
-                            @endforeach
-                        </div>
-                        <div class="form-group">
-                            <strong>Lượt xem:</strong>
-                            {{ $book->ViewCount }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Mô tả:</strong>
-                            {{ $book->Description == null ? 'Chưa có mô tả' : $book->Description }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Ngày tạo:</strong>
-                            {{ $book->CreatedDate }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Người tạo:</strong>
-                            {{ $book->CreatedBy }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Ngày sửa:</strong>
-                            {{ $book->ModifiedDate }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Người sửa:</strong>
-                            {{ $book->ModifiedBy }}
+                            <strong>Ghi chú:</strong> {{ $product->note }}
                         </div>
 
                     </div>
@@ -134,18 +81,20 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span
-                                class="card-title">Danh sách ảnh đính kèm của <strong>{{ $book->BookTitle }}</strong> ({{ $images->count() }})</span>
+                            <span class="card-title">Danh sách ảnh đính kèm của
+                                <strong>{{ $product->productname }}</strong> ({{ $images->count() }})</span>
                         </div>
-                        <div class="float-right"><a href="{{ route('book.edit', $book->BookID) }}#ImageAttach" class="btn btn-outline-primary"><i class="fa-solid fa-pen"></i> Sửa</a></div>
+                        <div class="float-right"><a href="{{ route('product.edit', $product->productid) }}#ImageAttach"
+                                class="btn btn-outline-primary"><i class="fa-solid fa-pen"></i> Sửa</a></div>
                     </div>
 
 
                     <div class="card-body">
                         <div class="row">
-                            @foreach($images as $image)
+                            @foreach ($images as $image)
                                 <div class="col-3">
-                                    <img src="{{ $image->ImagePath }}" alt="{{ $image->Description }}" class="img-thumbnail rounded" style="max-width: 200px">
+                                    <img src="{{ $image->imagepath }}" alt="{{ $image->imageid }}"
+                                        class="img-thumbnail rounded" style="max-width: 200px">
                                 </div>
                             @endforeach
                         </div>

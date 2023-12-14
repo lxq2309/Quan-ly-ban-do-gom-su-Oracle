@@ -13,7 +13,7 @@ class Product extends Model
     public $timestamps = false;
 
     static $rules = [
-		'productname' => 'required',
+        'productname' => 'required',
         'purchaseprice' => 'required',
         'sellingprice' => 'required',
         'weight' => 'required',
@@ -23,7 +23,18 @@ class Product extends Model
 
     protected $perPage = 20;
 
-    protected $guarded = [];
+    protected $guarded = ['imageurl', 'images-url'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Áp dụng điều kiện WHERE deleted = 0 cho SELECT và UPDATE
+        static::addGlobalScope('softDelete', function ($builder) {
+            $builder->where('deleted', 0);
+        });
+    }
+
 
 
     /**
@@ -55,7 +66,7 @@ class Product extends Model
      */
     public function glaze()
     {
-        return $this->hasOne('App\Models\admin\Color', 'glazeid', 'glazeid');
+        return $this->hasOne('App\Models\admin\Glaze', 'glazeid', 'glazeid');
     }
 
     /**
@@ -63,7 +74,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->hasOne('App\Models\admin\Color', 'categoryid', 'categoryid');
+        return $this->hasOne('App\Models\admin\Category', 'categoryid', 'categoryid');
     }
 
     /**
@@ -71,7 +82,7 @@ class Product extends Model
      */
     public function size()
     {
-        return $this->hasOne('App\Models\admin\Color', 'sizeid', 'sizeid');
+        return $this->hasOne('App\Models\admin\Size', 'sizeid', 'sizeid');
     }
 
     /**
@@ -101,29 +112,27 @@ class Product extends Model
 
     public function getPurchasePriceAttribute()
     {
-        if (empty($this->attributes['PURCHASEPRICE']))
-        {
+        if (empty($this->attributes['purchaseprice'])) {
             return 0;
         }
-        return $this->attributes['PURCHASEPRICE'] * 1000;
+        return $this->attributes['purchaseprice'] * 1000;
     }
 
     public function setPurchasePriceAttribute($val)
     {
-        $this->attributes['PURCHASEPRICE'] = $val / 1000;
+        $this->attributes['purchaseprice'] = $val / 1000;
     }
 
     public function getSellingPriceAttribute()
     {
-        if (empty($this->attributes['SELLINGPRICE']))
-        {
+        if (empty($this->attributes['sellingprice'])) {
             return 0;
         }
-        return $this->attributes['SELLINGPRICE'] * 1000;
+        return $this->attributes['sellingprice'] * 1000;
     }
 
     public function setSellingPriceAttribute($val)
     {
-        $this->attributes['SELLINGPRICE'] = $val / 1000;
+        $this->attributes['sellingprice'] = $val / 1000;
     }
 }

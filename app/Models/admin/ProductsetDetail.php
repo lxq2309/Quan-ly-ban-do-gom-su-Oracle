@@ -15,6 +15,8 @@ class ProductsetDetail extends Model
         'productid' => 'required'
     ];
 
+    public $incrementing = false;
+
     protected $perPage = 20;
 
     public $timestamps = false;
@@ -28,11 +30,11 @@ class ProductsetDetail extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function products()
+    public function product()
     {
-        return $this->hasMany('App\Models\admin\Product', 'productid', 'productid');
+        return $this->hasOne('App\Models\admin\Product', 'productid', 'productid');
     }
 
     /**

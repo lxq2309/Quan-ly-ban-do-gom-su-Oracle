@@ -18,6 +18,16 @@ class PurchaseOrder extends Model
 
     public $timestamps = false;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Áp dụng điều kiện WHERE deleted = 0 cho SELECT và UPDATE
+        static::addGlobalScope('softDelete', function ($builder) {
+            $builder->where('deleted', 0);
+        });
+    }
+
     /**
      * Attributes that should be mass-assignable.
      *

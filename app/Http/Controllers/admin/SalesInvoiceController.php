@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\admin\Customer;
-use App\Models\admin\Publisher;
 use App\Models\admin\SalesInvoice;
 use App\Models\admin\InvoiceDetail;
-use App\Models\admin\Supplier;
-use App\Models\Book;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -118,7 +115,9 @@ class SalesInvoiceController extends Controller
      */
     public function destroy($id)
     {
-        $salesInvoice = SalesInvoice::find($id)->delete();
+        $salesInvoice = SalesInvoice::find($id);
+        $salesInvoice->deleted = 1;
+        $salesInvoice->save();
 
         return redirect()->route('sales-invoice.index')
             ->with('success', 'Xoá hoá đơn thành công');

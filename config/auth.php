@@ -66,6 +66,10 @@ return [
     */
 
     'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => Employee::class,
+        ],
         'admins' => [
             'driver' => 'eloquent',
             'model' => Employee::class,

@@ -18,7 +18,7 @@
             </select>
         </div>
 
-        <input type="hidden" name="employeeid" value="1">
+        <input type="hidden" name="employeeid" value="{{ session('admin_id') }}">
 
         <!-- Add Sales Order Detail fields -->
         <div class="form-group">
@@ -146,8 +146,8 @@
             if (results.length > 0) {
                 results.forEach(product => {
                     var resultOption = document.createElement('option');
-                    resultOption.value = product.ProductID;
-                    resultOption.textContent = product.ProductName;
+                    resultOption.value = product.productid;
+                    resultOption.textContent = product.productname;
                     resultsContainer.appendChild(resultOption);
                 });
                 displaySelectedProduct(results[0]);
@@ -173,7 +173,7 @@
         // Function to display selected product information
         function displaySelectedProduct(product) {
             var selectedProductInfo = document.getElementById('selectedProductInfo');
-            selectedProductInfo.innerHTML = `<p><mark>sản phẩm đang chọn: ${product.ProductName} - Mã sản phẩm: <strong>${product.ProductID}</strong></mark>`;
+            selectedProductInfo.innerHTML = `<p><mark>sản phẩm đang chọn: ${product.productname} - Mã sản phẩm: <strong>${product.productid}</strong></mark>`;
         }
 
         // Function to add additional product fields dynamically
@@ -220,7 +220,7 @@
                 fetch('/api/product/' + productID)
                     .then(response => response.json())
                     .then(product => {
-                        cardTitle.innerHTML = product.ProductName;
+                        cardTitle.innerHTML = product.productname;
                     });
             }
         }

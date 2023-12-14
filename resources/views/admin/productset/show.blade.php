@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ $bookset->SetTitle }}
+    {{ $productset->setname }}
 @endsection
 
 @section('content')
@@ -11,53 +11,38 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Thông tin bộ sách') }}</span>
+                            <span class="card-title">{{ __('Thông tin bộ sản phẩm') }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('bookset.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('productset.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
                         <div class="form-group">
-                            <img src="{{ $bookset->SetAvatar }}" alt="{{ $bookset->SetTitle }}" class="img-thumbnail rounded" style="max-width: 300px">
+                            <img src="{{ $productset->image }}" alt="{{ $productset->setname }}"
+                                class="img-thumbnail rounded" style="max-width: 300px">
                         </div>
 
                         <div class="form-group">
-                            <strong>Mã bộ sách:</strong>
-                            {{ $bookset->SetID }}
+                            <strong>Mã bộ sản phẩm:</strong>
+                            {{ $productset->setid }}
                         </div>
                         <div class="form-group">
-                            <strong>Tên bộ sách:</strong>
-                            {{ $bookset->SetTitle }}
+                            <strong>Tên bộ sản phẩm:</strong>
+                            {{ $productset->setname }}
                         </div>
                         <div class="form-group">
                             <strong>Đường dẫn ảnh:</strong>
-                            {{ $bookset->SetAvatar }}
+                            {{ $productset->image }}
                         </div>
                         <div class="form-group">
-                            <strong>Số lượng sách:</strong>
-                            {{ $books->count() }}
+                            <strong>Số sản phẩm:</strong>
+                            {{ $productsetdetails->count() }}
                         </div>
                         <div class="form-group">
                             <strong>Mô tả:</strong>
-                            {{ $books->count() == 0 ? 'Chưa có mô tả' : ($books[0]->Description == null ? 'Chưa có mô tả' : $books[0]->Description) }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Ngày tạo:</strong>
-                            {{ $bookset->CreatedDate }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Người tạo:</strong>
-                            {{ $bookset->CreatedBy }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Ngày sửa:</strong>
-                            {{ $bookset->ModifiedDate }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Người tạo:</strong>
-                            {{ $bookset->ModifiedBy }}
+                            {{ $productset->note }}
                         </div>
                     </div>
                 </div>
@@ -65,17 +50,18 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span
-                                class="card-title">Các cuốn sách thuộc <strong>{{ $bookset->SetTitle }}</strong></span>
+                            <span class="card-title">Các sản phẩm của bộ <strong>{{ $productset->setname }}</strong></span>
                         </div>
                     </div>
 
 
                     <div class="card-body">
                         <div class="list-group">
-                            @foreach($books as $book)
-                                <a href="{{ route('book.show', $book->BookID) }}"
-                                   class="list-group-item list-group-item-action">{{ $book->BookTitle }}</a>
+                            @foreach ($productsetdetails as $setdetail)
+                                <a href="{{ route('product.show', $setdetail->productid) }}"
+                                    class="list-group-item list-group-item-action">{{ $setdetail->product?->productname }}
+                                    <br />
+                                    (Số lượng: <strong>{{ $setdetail->quantity }}</strong>)</a>
                             @endforeach
                         </div>
                     </div>

@@ -16,10 +16,9 @@ class RedirectIfNotAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guard('admin')->check()) {
-            return redirect('/admin/login');
+        if (session('admin_id') == null) {
+            return redirect('/login');
         }
-
         return $next($request);
     }
 }
