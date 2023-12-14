@@ -34,19 +34,23 @@ class SalesInvoice extends Model
     {
         return $this->hasOne('App\Models\admin\Employee', 'employeeid', 'employeeid');
     }
+    public function customer()
+    {
+        return $this->hasOne('App\Models\admin\Customer', 'customerid', 'customerid');
+    }
 
 
     public function getTotalAmountAttribute()
     {
-        if (empty($this->attributes['TOTALAMOUNT']))
+        if (empty($this->attributes['totalamount']))
         {
             return 0;
         }
-        return $this->attributes['TOTALAMOUNT'] * 1000;
+        return $this->attributes['totalamount'] * 1000;
     }
 
     public function setTotalAmountAttribute($val)
     {
-        $this->attributes['TOTALAMOUNT'] = $val / 1000;
+        $this->attributes['totalamount'] = $val / 1000;
     }
 }

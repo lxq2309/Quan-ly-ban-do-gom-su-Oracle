@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ "Hoá đơn $purchaseOrder->OrderID" }}
+    {{ "Hoá đơn $purchaseOrder->orderid" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,6 @@
                             <span class="card-title">{{ __('Thông tin') }} hoá đơn nhập</span>
                         </div>
                         <div class="float-right">
-                            <a href="{{ route('purchase-order.edit', $purchaseOrder->OrderID) }}" class="btn btn-outline-primary"><i class="fa-solid fa-pen"></i> Sửa thông tin</a>
                             <a class="btn btn-primary" href="{{ route('purchase-order.index') }}"> {{ __('Quay lại') }}</a>
                         </div>
                     </div>
@@ -28,19 +27,23 @@
 
                         <div class="form-group">
                             <strong>Mã hoá đơn:</strong>
-                            {{ $purchaseOrder->OrderID }}
+                            {{ $purchaseOrder->orderid }}
                         </div>
                         <div class="form-group">
                             <strong>Ngày nhập</strong>
-                            {{ $purchaseOrder->OrderDate }}
+                            {{ $purchaseOrder->orderdate }}
                         </div>
                         <div class="form-group">
                             <strong>Nhà cung cấp</strong>
-                            {{ $purchaseOrder->supplier == null ? '' : $purchaseOrder->supplier->SupplierName }}
+                            {{ $purchaseOrder->supplier?->suppliername }}
                         </div>
                         <div class="form-group">
                             <strong>Tổng tiền:</strong>
-                            {{ $purchaseOrder->TotalPrice }} VNĐ
+                            {{ $purchaseOrder->totalamount }} VNĐ
+                        </div>
+                        <div class="form-group">
+                            <strong>Người tạo:</strong>
+                            {{ $purchaseOrder->employee?->employeename }}
                         </div>
                     </div>
                 </div>
@@ -58,7 +61,7 @@
                             <div class="card card-info">
                                 <div class="card-header">
                                     <div class="float-left">
-                                        <span class="card-title">{{ $purchaseOrderDetail->book->BookTitle }}</span>
+                                        <span class="card-title">{{ $purchaseOrderDetail->product->productname }}</span>
                                     </div>
                                 </div>
 
@@ -66,15 +69,15 @@
 
                                     <div class="form-group">
                                         <strong>Số lượng:</strong>
-                                        {{ $purchaseOrderDetail->QuantityReceived }}
+                                        {{ $purchaseOrderDetail->quantity }}
                                     </div>
                                     <div class="form-group">
                                         <strong>Giá bán:</strong>
-                                        {{ $purchaseOrderDetail->Price }} VNĐ
+                                        {{ $purchaseOrderDetail->price }} VNĐ
                                     </div>
                                     <div class="form-group">
                                         <strong>Thành tiền:</strong>
-                                        {{ $purchaseOrderDetail->SubTotal }} VNĐ
+                                        {{ $purchaseOrderDetail->totalamount }} VNĐ
                                     </div>
                                 </div>
                             </div>

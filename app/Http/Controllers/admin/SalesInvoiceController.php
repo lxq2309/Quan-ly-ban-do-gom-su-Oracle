@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\admin\Customer;
 use App\Models\admin\Publisher;
-use App\Models\admin\PurchaseOrder;
-use App\Models\admin\PurchaseOrderDetail;
+use App\Models\admin\SalesInvoice;
+use App\Models\admin\InvoiceDetail;
 use App\Models\admin\Supplier;
 use App\Models\Book;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
- * Class PurchaseOrderController
+ * Class SalesInvoiceController
  * @package App\Http\Controllers
  */
-class PurchaseOrderController extends Controller
+class SalesInvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,20 +24,20 @@ class PurchaseOrderController extends Controller
      */
     public function index(Request $request)
     {
-        $purchaseOrders = PurchaseOrder::query();
+        $salesInvoices = SalesInvoice::query();
         if ($request->has('search')) {
             $searchText = $request->input('search');
-            $purchaseOrders->where('orderid', '=', $searchText);
+            $salesInvoices->where('invoiceid', '=', $searchText);
         }
         $orderBy = ($request->has('order') && $request->input('order') == 'asc') ? 'desc' : 'asc';
         if (empty($request->input('order'))) {
             $orderBy = 'desc';
         }
-        $purchaseOrders->orderBy('orderid', $orderBy);
+        $salesInvoices->orderBy('invoiceid', $orderBy);
         $orderBy = ($request->has('order') && $request->input('order') == 'asc') ? 'desc' : 'asc';
-        $purchaseOrders = $purchaseOrders->paginate()->appends(['order' => $orderBy]);
-        return view('admin.purchase-order.index', compact('purchaseOrders'))
-            ->with('i', ($purchaseOrders->currentPage() - 1) * $purchaseOrders->perPage());
+        $salesInvoices = $salesInvoices->paginate()->appends(['order' => $orderBy]);
+        return view('admin.sales-invoice.index', compact('salesInvoices'))
+            ->with('i', ($salesInvoices->currentPage() - 1) * $salesInvoices->perPage());
     }
 
     /**
@@ -46,9 +47,9 @@ class PurchaseOrderController extends Controller
      */
     public function create()
     {
-        $purchaseOrder = new PurchaseOrder();
-        $suppliers = Supplier::all();
-        return view('admin.purchase-order.create', compact('purchaseOrder', 'suppliers'));
+        $salesInvoice = new SalesInvoice();
+        $customers = Customer::all();
+        return view('admin.sales-invoice.create', compact('salesInvoice', 'customers'));
     }
 
     /**
@@ -62,11 +63,11 @@ class PurchaseOrderController extends Controller
 
         // Tạo hoá đơn nhập
 
-        $purchaseOrder = new PurchaseOrder();
-        $purchaseOrder->orderdate = Carbon::parse($request->input('orderdate'))->format('Y-m-d H:i:s');
-        $purchaseOrder->supplierid = $request->input('supplierid');
-        $purchaseOrder->employeeid = $request->input('employeeid');
-        $purchaseOrder->save();
+        $salesInvoice = new SalesInvoice();
+        $salesInvoice->saledate = Carbon::parse($request->input('saledate'))->format('Y-m-d H:i:s');
+        $salesInvoice->customerid = $request->input('customerid');
+        $salesInvoice->employeeid = $request->input('employeeid');
+        $salesInvoice->save();
         $totalPrice = 0;
 
         // Lấy dữ liệu chi tiết sản phẩm từ form
@@ -76,22 +77,22 @@ class PurchaseOrderController extends Controller
 
         // Lưu chi tiết hoá đơn
         foreach ($productIDs as $key => $productID) {
-            $purchaseOrderDetail = new PurchaseOrderDetail();
-            $purchaseOrderDetail->orderid = $purchaseOrder->orderid;
-            $purchaseOrderDetail->productid = $productID;
-            $purchaseOrderDetail->quantity = $quantities[$key];
-            $purchaseOrderDetail->price = $prices[$key];
+            $InvoiceDetail = new InvoiceDetail();
+            $InvoiceDetail->invoiceid = $salesInvoice->invoiceid;
+            $InvoiceDetail->productid = $productID;
+            $InvoiceDetail->quantity = $quantities[$key];
+            $InvoiceDetail->price = $prices[$key];
             $subTotal = $quantities[$key] * $prices[$key];
-            $purchaseOrderDetail->totalamount = $subTotal;
-            $purchaseOrderDetail->save();
+            $InvoiceDetail->totalamount = $subTotal;
+            $InvoiceDetail->save();
 
             $totalPrice += $subTotal;
         }
 
-        $purchaseOrder->totalamount = $totalPrice;
-        $purchaseOrder->save();
+        $salesInvoice->totalamount = $totalPrice;
+        $salesInvoice->save();
 
-        return redirect()->route('purchase-order.show', $purchaseOrder->orderid)
+        return redirect()->route('sales-invoice.show', $salesInvoice->invoiceid)
             ->with('success', 'Tạo hoá đơn thành công!');
     }
 
@@ -103,10 +104,10 @@ class PurchaseOrderController extends Controller
      */
     public function show($id)
     {
-        $purchaseOrder = PurchaseOrder::find($id);
-        $purchaseOrderDetails = $purchaseOrder->purchaseorderdetail;
+        $salesInvoice = SalesInvoice::find($id);
+        $salesInvoiceDetails = $salesInvoice->salesinvoicedetail;
 
-        return view('admin.purchase-order.show', compact('purchaseOrder', 'purchaseOrderDetails'));
+        return view('admin.sales-invoice.show', compact('salesInvoice', 'salesInvoiceDetails'));
     }
 
 
@@ -117,9 +118,9 @@ class PurchaseOrderController extends Controller
      */
     public function destroy($id)
     {
-        $purchaseOrder = PurchaseOrder::find($id)->delete();
+        $salesInvoice = SalesInvoice::find($id)->delete();
 
-        return redirect()->route('purchase-order.index')
+        return redirect()->route('sales-invoice.index')
             ->with('success', 'Xoá hoá đơn thành công');
     }
 }

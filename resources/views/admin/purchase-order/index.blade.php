@@ -10,16 +10,6 @@
             <div class="card">
                 <div class="card-header">
                     <div class="dt-buttons btn-group flex-wrap">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="exportData"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Xuất dữ liệu
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="exportData">
-                                <a class="dropdown-item" href="#" id="buttons-excel">Excel</a>
-                                <a class="dropdown-item" href="#" id="buttons-pdf">PDF</a>
-                            </div>
-                        </div>
                         <div class="ml-1"></div>
                         <div class="dropdown">
                             @php
@@ -80,32 +70,31 @@
                                         <th>Ngày nhập</th>
                                         <th>Nhà cung cấp</th>
                                         <th>Tổng tiền</th>
+                                        <th>Người tạo</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($purchaseOrders as $purchaseOrder)
                                         <tr class="even" onmouseover="readListScripts.showTableActions()"
                                             onmouseleave="readListScripts.hideTableActions()">
-                                            <td>{{ $purchaseOrder->OrderID }}</td>
-                                            <td>{{ $purchaseOrder->OrderDate }}</td>
-                                            <td>{{ $purchaseOrder->supplier == null ? '' : $purchaseOrder->supplier->SupplierName }}</td>
-                                            <td>{{ $purchaseOrder->TotalPrice }} VNĐ</td>
+                                            <td>{{ $purchaseOrder->orderid }}</td>
+                                            <td>{{ $purchaseOrder->orderdate }}</td>
+                                            <td>{{ $purchaseOrder->supplier?->suppliername  }}</td>
+                                            <td>{{ $purchaseOrder->totalamount }} VNĐ</td>
+                                            <td>{{ $purchaseOrder->employee?->employeename }}</td>
 
                                             <td style="position: absolute; right: 0; display: none">
                                                 <div style="position: sticky;">
                                                     <form
-                                                        action="{{ route('purchase-order.destroy',$purchaseOrder->OrderID) }}"
+                                                        action="{{ route('purchase-order.destroy',$purchaseOrder->orderid) }}"
                                                         method="POST">
                                                         <a class="btn btn-sm btn-primary "
-                                                           href="{{ route('purchase-order.show',$purchaseOrder->OrderID) }}"><i
-                                                                class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                        <a class="btn btn-sm btn-success"
-                                                           href="{{ route('purchase-order.edit',$purchaseOrder->OrderID) }}"><i
-                                                                class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                           href="{{ route('purchase-order.show',$purchaseOrder->orderid) }}"><i
+                                                                class="fa fa-fw fa-eye"></i> {{ __('Xem chi tiết') }}</a>
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
+                                                                class="fa fa-fw fa-trash"></i> {{ __('Xoá') }}
                                                         </button>
                                                     </form>
                                                 </div>
@@ -137,29 +126,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('exportToExcelScripts')
-    <script>
-        function exportToExcel() {
-            let tableName = 'purchase-order';
-            let apiUrl = `/api/${tableName}/all`;
-            alert('Đang xuất thành file ' + tableName + '.xlsx');
-            // Lấy dữ liệu từ API
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    // Chuyển đổi dữ liệu thành định dạng Excel
-                    const workbook = XLSX.utils.book_new();
-                    const worksheet = XLSX.utils.json_to_sheet(data);
-                    XLSX.utils.book_append_sheet(workbook, worksheet, tableName);
-
-                    // Xuất Excel
-                    XLSX.writeFile(workbook, tableName + '.xlsx');
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                });
-        }
-    </script>
 @endsection

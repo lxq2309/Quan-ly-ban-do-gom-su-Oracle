@@ -14,6 +14,8 @@ class InvoiceDetail extends Model
         'productid' => 'required',
     ];
 
+    public $timestamps = false;
+
     protected $perPage = 20;
 
 
@@ -29,30 +31,30 @@ class InvoiceDetail extends Model
 
     public function getPriceAttribute()
     {
-        if (empty($this->attributes['PRICE']))
+        if (empty($this->attributes['price']))
         {
             return 0;
         }
-        return $this->attributes['PRICE'] * 1000;
+        return $this->attributes['price'] * 1000;
     }
 
     public function setPriceAttribute($val)
     {
-        $this->attributes['PRICE'] = $val / 1000;
+        $this->attributes['price'] = $val / 1000;
     }
 
     public function getTotalAmountAttribute()
     {
-        if (empty($this->attributes['TOTALAMOUNT']))
+        if (empty($this->attributes['totalamount']))
         {
             return 0;
         }
-        return $this->attributes['TOTALAMOUNT'] * 1000;
+        return $this->attributes['totalamount'] * 1000;
     }
 
     public function setTotalAmountAttribute($val)
     {
-        $this->attributes['TOTALAMOUNT'] = $val / 1000;
+        $this->attributes['totalamount'] = $val / 1000;
     }
 
 }

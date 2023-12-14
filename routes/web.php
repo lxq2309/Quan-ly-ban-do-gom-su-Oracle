@@ -44,4 +44,4 @@ Route::resource('/employee', \App\Http\Controllers\admin\EmployeeController::cla
 Route::resource('/product', \App\Http\Controllers\admin\BookController::class);
 Route::resource('/productset', \App\Http\Controllers\admin\BooksetController::class);
 Route::resource('/purchase-order', \App\Http\Controllers\admin\PurchaseOrderController::class);
-Route::resource('/sales-invoice', \App\Http\Controllers\admin\SalesOrderController::class);
+Route::resource('/sales-invoice', \App\Http\Controllers\admin\SalesInvoiceController::class);

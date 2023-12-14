@@ -2,17 +2,17 @@
     <div class="box-body">
         <div class="form-group required">
             {{ Form::label('Ngày nhập') }}
-            {{ Form::datetimelocal('orderdate', $purchaseOrder->orderdate, ['class' => 'form-control' . ($errors->has('orderdate') ? ' is-invalid' : '')]) }}
-            {!! $errors->first('orderdate', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::datetimelocal('saledate', $salesInvoice->saledate, ['class' => 'form-control' . ($errors->has('saledate') ? ' is-invalid' : '')]) }}
+            {!! $errors->first('saledate', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group required">
-            {{ Form::label('Nhà cung cấp') }}
-            <select name="supplierid" class="form-control">
-                <option value="">-- Chọn nhà cung cấp --</option>
-                @foreach($suppliers as $supplier)
-                    <option value="{{ $supplier->supplierid }}"
-                        {{ $supplier->supplierid == $purchaseOrder->supplierid ? 'selected' : '' }}>
-                        {{ $supplier->suppliername }}
+            {{ Form::label('Khách hàng') }}
+            <select name="customerid" class="form-control">
+                <option value="">-- Chọn khách hàng --</option>
+                @foreach($customers as $customer)
+                    <option value="{{ $customer->customerid }}"
+                        {{ $customer->customerid == $salesInvoice->customerid ? 'selected' : '' }}>
+                        {{ $customer->customername }}
                     </option>
                 @endforeach
             </select>
@@ -20,10 +20,9 @@
 
         <input type="hidden" name="employeeid" value="1">
 
-        <!-- Add Purchase Order Detail fields -->
+        <!-- Add Sales Order Detail fields -->
         <div class="form-group">
-            <label for="productSearch">Tìm Mã Sản Phẩm / <a class="btn-link" href="{{ route('product.create') }}" target="_blank">Thêm
-                    Sản Phẩm Mới</a> </label>
+            <label for="productSearch">Tìm Mã Sản Phẩm</label>
             <input type="text" class="form-control" id="productSearch" placeholder="Nhập tên sản phẩm">
             <select id="productSearchResults" class="form-control" style="margin-top: 10px;">
                 <option value="">Kết quả sẽ hiển thị ở đây.</option>
@@ -64,11 +63,11 @@
                             </div>
                         </div>
                     @else
-                        @foreach($purchaseOrder->purchaseorderdetail as $orderdetail)
+                        @foreach($salesInvoice->salesinvoicedetail as $invoicedetail)
                             <div class="card card-info">
                                 <div class="card-header">
                                     <div class="float-left">
-                                        <span class="card-title">{{ $orderdetail->product?->productname }}</span>
+                                        <span class="card-title">{{ $invoicedetail->product?->productname }}</span>
                                         <button type="button" class="btn btn-xs btn-danger ml-1"
                                                 onclick="deleteProductField()">Xoá
                                         </button>
@@ -79,17 +78,17 @@
                                     <div class="form-group">
                                         <label for="">Mã sản phẩm:</label>
                                         <input type="text" class="form-control" name="ProductID[]" onchange="setTitle()"
-                                               value="{{ $orderdetail->productid }}">
+                                               value="{{ $invoicedetail->productid }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Số lượng:</label>
                                         <input type="number" class="form-control" name="Quantity[]"
-                                               value="{{ $orderdetail->quantity }}">
+                                               value="{{ $invoicedetail->quantity }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Giá tiền:</label>
                                         <input type="number" class="form-control" name="Price[]"
-                                               value="{{ $orderdetail->price }}">
+                                               value="{{ $invoicedetail->price }}">
                                     </div>
                                 </div>
                             </div>
@@ -240,8 +239,8 @@
         }
 
         function validateForm() {
-            var orderdate = document.getElementsByName('orderdate')[0];
-            var supplierid = document.getElementsByName('supplierid')[0];
+            var saledate = document.getElementsByName('saledate')[0];
+            var customerid = document.getElementsByName('customerid')[0];
             var productIds = document.getElementsByName('ProductID[]');
             let listId = [];
             productIds.forEach(function (id) {
@@ -251,15 +250,15 @@
             var quantityReceived = document.getElementsByName('Quantity[]');
             var price = document.getElementsByName('Price[]');
 
-            if (orderdate.value === '') {
+            if (saledate.value === '') {
                 alert('Vui lòng chọn Ngày nhập.');
-                orderdate.focus();
+                saledate.focus();
                 return false;
             }
 
-            if (supplierid.value === '') {
-                alert('Vui lòng chọn Nhà cung cấp.');
-                supplierid.focus();
+            if (customerid.value === '') {
+                alert('Vui lòng chọn khách hàng.');
+                customerid.focus();
                 return false;
             }
 

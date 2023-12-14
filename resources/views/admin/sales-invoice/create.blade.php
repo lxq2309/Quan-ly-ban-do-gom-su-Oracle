@@ -1,16 +1,16 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ "Sửa thông tin hoá đơn nhập $purchaseOrder->OrderID" }}
+    {{ __('Thêm hoá đơn bán mới') }}
 @endsection
 
 @php
-    $method = 'PATCH';
+    $method = "POST";
 @endphp
 
 @section('content')
     <section class="content container-fluid">
-        <div class="">
+        <div class="row">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
@@ -18,19 +18,18 @@
                 <div class="card card-default">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Sửa thông tin') }}</span>
+                            <span class="card-title">{{ __('Thêm mới') }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('purchase-order.index') }}"> {{ __('Trở lại') }}</a>
+                            <a class="btn btn-primary" href="{{ route('sales-invoice.index') }}"> {{ __('Trở lại') }}</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('purchase-order.update', $purchaseOrder->OrderID) }}" role="form"
+                        <form method="POST" action="{{ route('sales-invoice.store') }}" role="form"
                               enctype="multipart/form-data">
-                            {{ method_field($method) }}
                             @csrf
 
-                            @include('admin.purchase-order.form')
+                            @include('admin.sales-invoice.form')
 
                         </form>
                     </div>
