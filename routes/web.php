@@ -36,7 +36,7 @@ Route::resource('/country', \App\Http\Controllers\admin\CountryController::class
 
 // crud hơi dài
 Route::resource('/supplier', \App\Http\Controllers\admin\SupplierController::class);
-Route::resource('/customer', \App\Http\Controllers\admin\SupplierController::class);
+Route::resource('/customer', \App\Http\Controllers\admin\CustomerController::class);
 
 Route::resource('/employee', \App\Http\Controllers\admin\EmployeeController::class);
 

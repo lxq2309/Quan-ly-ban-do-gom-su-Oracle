@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    Nhà cung cấp
+    Khách hàng
 @endsection
 
 @section('content')
@@ -9,9 +9,9 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('supplier.create') }}" class="btn btn-primary float-right"
+                    <a href="{{ route('customer.create') }}" class="btn btn-primary float-right"
                        data-placement="left">
-                        {{ __('Thêm mới nhà cung cấp') }}
+                        {{ __('Thêm mới khách hàng') }}
                     </a>
                 </div>
                 @if ($message = Session::get('success'))
@@ -29,30 +29,30 @@
                                        aria-describedby="example1_info">
                                     <thead>
                                     <tr>
-                                        <th>Mã nhà cung cấp</th>
-                                        <th>Tên nhà cung cấp</th>
+                                        <th>Mã khách hàng</th>
+                                        <th>Tên khách hàng</th>
                                         <th>Địa chỉ</th>
                                         <th>Số điện thoại</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($suppliers as $supplier)
+                                    @foreach ($customers as $customer)
                                         <tr class="even" onmouseover="readListScripts.showTableActions()"
                                             onmouseleave="readListScripts.hideTableActions()">
-                                            <td>{{ $supplier->supplierid }}</td>
-                                            <td>{{ $supplier->suppliername }}</td>
-                                            <td>{{ $supplier->address }}</td>
-                                            <td>{{ $supplier->phonenumber }}</td>
+                                            <td>{{ $customer->customerid }}</td>
+                                            <td>{{ $customer->customername }}</td>
+                                            <td>{{ $customer->address }}</td>
+                                            <td>{{ $customer->phonenumber }}</td>
 
                                             <td style="position: absolute; right: 0; display: none">
                                                 <div style="position: sticky;">
-                                                    <form action="{{ route('supplier.destroy',$supplier->supplierid) }}"
+                                                    <form action="{{ route('customer.destroy',$customer->customerid) }}"
                                                           method="POST">
                                                         <a class="btn btn-sm btn-primary "
-                                                           href="{{ route('supplier.show',$supplier->supplierid) }}"><i
+                                                           href="{{ route('customer.show',$customer->customerid) }}"><i
                                                                 class="fa fa-fw fa-eye"></i> {{ __('Xem chi tiết') }}</a>
                                                         <a class="btn btn-sm btn-success"
-                                                           href="{{ route('supplier.edit',$supplier->supplierid) }}"><i
+                                                           href="{{ route('customer.edit',$customer->customerid) }}"><i
                                                                 class="fa fa-fw fa-edit"></i> {{ __('Sửa') }}</a>
                                                         @csrf
                                                         @method('DELETE')
@@ -69,14 +69,14 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-7">
-                                {!! $suppliers->links() !!}
+                                {!! $customers->links() !!}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                                    Hiển thị {{ $i + 1 }} đến {{ $i + $suppliers->count() }} trong tổng
-                                    số {{ $supplier->count() }} bản ghi
+                                    Hiển thị {{ $i + 1 }} đến {{ $i + $customers->count() }} trong tổng
+                                    số {{ $customer->count() }} bản ghi
                                 </div>
                             </div>
                         </div>

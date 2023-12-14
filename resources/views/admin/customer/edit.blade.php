@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ "Sửa thông tin $supplier->suppliername" }}
+    {{ "Sửa thông tin $customer->customername" }}
 @endsection
 
 @php
@@ -21,16 +21,16 @@
                             <span class="card-title">{{ __('Sửa thông tin') }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('supplier.index') }}"> {{ __('Trở lại') }}</a>
+                            <a class="btn btn-primary" href="{{ route('customer.index') }}"> {{ __('Trở lại') }}</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('supplier.update', $supplier->supplierid) }}" role="form"
+                        <form method="POST" action="{{ route('customer.update', $customer->customerid) }}" role="form"
                               enctype="multipart/form-data">
                             {{ method_field($method) }}
                             @csrf
 
-                            @include('admin.supplier.form')
+                            @include('admin.customer.form')
 
                         </form>
                     </div>

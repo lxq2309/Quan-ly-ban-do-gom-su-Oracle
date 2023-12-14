@@ -1,16 +1,16 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ "Sửa thông tin $supplier->suppliername" }}
+    {{ __('Thêm mới khách hàng') }}
 @endsection
 
 @php
-    $method = 'PATCH';
+    $method = "POST";
 @endphp
 
 @section('content')
     <section class="content container-fluid">
-        <div class="">
+        <div class="row">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
@@ -18,19 +18,18 @@
                 <div class="card card-default">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Sửa thông tin') }}</span>
+                            <span class="card-title">{{ __('Thêm mới') }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('supplier.index') }}"> {{ __('Trở lại') }}</a>
+                            <a class="btn btn-primary" href="{{ route('customer.index') }}"> {{ __('Trở lại') }}</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('supplier.update', $supplier->supplierid) }}" role="form"
+                        <form method="POST" action="{{ route('customer.store') }}" role="form"
                               enctype="multipart/form-data">
-                            {{ method_field($method) }}
                             @csrf
 
-                            @include('admin.supplier.form')
+                            @include('admin.customer.form')
 
                         </form>
                     </div>

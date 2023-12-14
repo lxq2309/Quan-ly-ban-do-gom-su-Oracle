@@ -1,7 +1,7 @@
 @extends('admin.layout.default')
 
 @section('template_title')
-    {{ $supplier->suppliername }}
+    {{ $customer->customername }}
 @endsection
 
 @section('content')
@@ -11,30 +11,30 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Thông tin nhà cung cấp') }}</span>
+                            <span class="card-title">{{ __('Thông tin khách hàng') }}</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('supplier.index') }}"> {{ __('Trở lại') }}</a>
+                            <a class="btn btn-primary" href="{{ route('customer.index') }}"> {{ __('Trở lại') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
 
                         <div class="form-group">
-                            <strong>Mã nhà cung cấp:</strong>
-                            {{ $supplier->supplierid }}
+                            <strong>Mã khách hàng:</strong>
+                            {{ $customer->customerid }}
                         </div>
                         <div class="form-group">
-                            <strong>Tên nhà cung cấp:</strong>
-                            {{ $supplier->suppliername }}
+                            <strong>Tên khách hàng:</strong>
+                            {{ $customer->customername }}
                         </div>
                         <div class="form-group">
                             <strong>Địa chỉ:</strong>
-                            {{ $supplier->address }}
+                            {{ $customer->address }}
                         </div>
                         <div class="form-group">
                             <strong>Số điện thoại:</strong>
-                            {{ $supplier->phonenumber }}
+                            {{ $customer->phonenumber }}
                         </div>
                     </div>
                 </div>
