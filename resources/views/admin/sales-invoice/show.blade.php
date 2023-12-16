@@ -61,7 +61,7 @@
                             <div class="card card-info">
                                 <div class="card-header">
                                     <div class="float-left">
-                                        <span class="card-title">{{ $salesInvoiceDetail->product->productname }}</span>
+                                        <span class="card-title">{{ $salesInvoiceDetail->product?->productname }}</span>
                                     </div>
                                 </div>
 
