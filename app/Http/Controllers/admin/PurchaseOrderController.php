@@ -48,6 +48,7 @@ class PurchaseOrderController extends Controller
     {
         $purchaseOrder = new PurchaseOrder();
         $suppliers = Supplier::all();
+        $purchaseOrder->orderdate = now(); // or use \Carbon\Carbon::now() if not already imported
         return view('admin.purchase-order.create', compact('purchaseOrder', 'suppliers'));
     }
 
@@ -90,6 +91,7 @@ class PurchaseOrderController extends Controller
 
         $purchaseOrder->totalamount = $totalPrice;
         $purchaseOrder->save();
+
 
         return redirect()->route('purchase-order.show', $purchaseOrder->orderid)
             ->with('success', 'Tạo hoá đơn thành công!');

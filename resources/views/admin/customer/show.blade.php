@@ -40,5 +40,25 @@
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="float-left">
+                    <span class="card-title">Các hoá đơn đã mua của khách hàng <strong>{{ $customer->customername }}</strong></span>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="list-group">
+                    @foreach ($salesinvoices as $salesinvoice)
+                        <a href="{{ route('sales-invoice.show', $salesinvoice->invoiceid) }}"
+                            class="list-group-item list-group-item-action">Mã hoá đơn {{ $salesinvoice->invoiceid }}
+                            <br />
+                            (Tổng tiền: <strong>{{ $salesinvoice->totalamount }} VNĐ</strong>)</a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </section>
 @endsection

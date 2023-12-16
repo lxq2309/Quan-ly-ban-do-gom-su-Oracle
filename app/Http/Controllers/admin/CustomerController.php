@@ -60,8 +60,9 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::find($id);
+        $salesinvoices = $customer->salesinvoices;
 
-        return view('admin.customer.show', compact('customer'));
+        return view('admin.customer.show', compact('customer', 'salesinvoices'));
     }
 
     /**
